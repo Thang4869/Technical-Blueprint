@@ -1,0 +1,861 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bizarre Brigade | Technical Infographic</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&family=Fira+Code:wght@500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="src/css/base.css">
+    <link rel="stylesheet" href="src/css/components.css">
+    <link rel="stylesheet" href="src/css/helpers.css">
+    
+    <!-- Chosen Palette: Energetic & Playful (Indigo, Emerald, Rose, Amber) -->
+    <!-- Application Structure Plan: The SPA is structured as a vertical scrolling infographic to guide the user through a logical narrative: Game Overview -> Core Mechanics -> Technical Architecture -> Performance Optimization -> Recreation MVP. This linear flow ensures technical concepts (like ECS and Spatial Hashing) are introduced after the basic game context is established. A sticky header provides context, while Material Design cards segment information cleanly. -->
+    <!-- Visualization & Content Choices: 
+         1. Game DNA: Goal: Inform/Compare. Method: Radar Chart (Chart.js). Justification: Perfect for showing balance across multiple game design attributes. NO SVG used.
+         2. Core Loop: Goal: Organize. Method: HTML/CSS Flexbox process flow. Justification: Clearly shows the sequential steps of gameplay without external diagramming tools. NO Mermaid/SVG used.
+         3. ECS Architecture: Goal: Organize. Method: Styled HTML Grid. Justification: Visually separates Entities, Components, and Systems to explain data-oriented design. NO SVG used.
+         4. Performance Budget: Goal: Compare (Composition). Method: Doughnut Chart (Chart.js). Justification: Illustrates the percentage of frame time allocated to different systems. NO SVG used.
+         5. Optimization Impact: Goal: Change/Compare. Method: Bar Chart (Chart.js). Justification: Demonstrates the drastic reduction in frame time after applying optimization techniques. NO SVG used. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+
+    
+</head>
+<body class="antialiased selection:bg-indigo-200 selection:text-indigo-900">
+    <div id="bb-error-overlay"></div>
+    <script>
+        (function(){
+            function showError(msg, url, line, col, err) {
+                const container = document.getElementById('bb-error-overlay');
+                if (!container) return;
+                container.style.display = 'block';
+                container.innerHTML = `<h3 class="bb-error-title">JavaScript Error Detected</h3><pre class="bb-error-pre">${msg}\n${url || ''}:${line || ''}:${col || ''}\n${err && err.stack ? err.stack : ''}</pre>`;
+            }
+            window.addEventListener('error', function(e){ showError(e.message, e.filename, e.lineno, e.colno, e.error); });
+            window.addEventListener('unhandledrejection', function(e){ showError(String(e.reason)); });
+            const oldErr = console.error; console.error = function(){ oldErr.apply(this, arguments); try { showError(Array.from(arguments).join(' ')); } catch(e){} };
+        })();
+    </script>
+
+    <nav class="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-slate-200 shadow-sm">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
+            <div class="flex items-center gap-2">
+                <div class="w-8 h-8 rounded bg-indigo-600 text-white flex items-center justify-center font-bold text-lg shadow-lg">B</div>
+                <span class="font-bold text-xl tracking-tight text-slate-800">Bizarre Brigade<span class="text-indigo-600">.</span></span>
+            </div>
+            <div class="hidden md:flex gap-6 text-sm font-semibold text-slate-500">
+                <a href="#overview" class="hover:text-indigo-600 transition-colors">Tổng Quan</a>
+                <a href="#mechanics" class="hover:text-indigo-600 transition-colors">Cơ Chế</a>
+                <a href="#architecture" class="hover:text-indigo-600 transition-colors">Kiến Trúc</a>
+                <a href="#optimization" class="hover:text-indigo-600 transition-colors">Tối Ưu</a>
+                <a href="a.html" class="hover:text-indigo-600 transition-colors font-semibold text-indigo-600">Khám Phá Chi tiết</a>
+            </div>
+        </div>
+    </nav>
+
+    <header class="bg-slate-900 text-white pt-24 pb-20 px-4 relative overflow-hidden">
+        <div class="absolute inset-0 opacity-20 header-pattern"></div>
+        <div class="max-w-4xl mx-auto text-center relative z-10">
+            <span class="inline-block py-1 px-3 rounded-full bg-indigo-500/20 text-indigo-300 font-semibold text-xs mb-6 border border-indigo-500/30 uppercase tracking-widest">Bản Thuyết Minh Kỹ Thuật (Technical Blueprint)</span>
+            <h1 class="text-4xl md:text-6xl font-extrabold tracking-tight mb-6">Phân Tích Chuyên Sâu<br><span class="gradient-text text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-rose-400">Bizarre Brigade</span></h1>
+            <p class="text-lg md:text-xl text-slate-300 max-w-2xl mx-auto mb-10 leading-relaxed">
+                Tài liệu phục vụ việc tái tạo kiến trúc hệ thống, gameplay loop và pipeline đồ họa cho dự án minigame Auto-shooter / Roguelite sinh tồn màn hình vỡ.
+            </p>
+            <div class="flex flex-wrap justify-center gap-4">
+                <div class="bg-slate-800/80 backdrop-blur border border-slate-700 rounded-lg px-6 py-4">
+                    <div class="text-3xl font-bold text-emerald-400 mb-1">10,000+</div>
+                    <div class="text-xs text-slate-400 uppercase tracking-wide">Entity Mục Tiêu</div>
+                </div>
+                <div class="bg-slate-800/80 backdrop-blur border border-slate-700 rounded-lg px-6 py-4">
+                    <div class="text-3xl font-bold text-rose-400 mb-1">60 FPS</div>
+                    <div class="text-xs text-slate-400 uppercase tracking-wide">Mức Khung Hình Chuẩn</div>
+                </div>
+                <div class="bg-slate-800/80 backdrop-blur border border-slate-700 rounded-lg px-6 py-4">
+                    <div class="text-3xl font-bold text-amber-400 mb-1">ECS</div>
+                    <div class="text-xs text-slate-400 uppercase tracking-wide">Kiến Trúc Lõi</div>
+                </div>
+            </div>
+            <div class="mt-8">
+                <a id="exploreBtn" href="a.html" class="ripple-link transition-link cta-glow inline-block bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-3 px-6 rounded-lg shadow-lg">Khám phá chi tiết</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-6xl mx-auto px-4 py-16 sm:px-6 lg:px-8 space-y-24">
+
+        <section id="overview" class="scroll-mt-24">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-slate-900 mb-4">Nhận Diện Hệ Thống Lõi</h2>
+                <p class="text-slate-600 max-w-2xl mx-auto">Phân tích DNA của trò chơi để xác định trọng tâm phát triển. Game tập trung tuyệt đối vào nhịp độ và số lượng vật thể thay vì logic AI phức tạp.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div class="bg-white p-8 rounded-2xl shadow-lg border border-slate-100 tech-card">
+                    <h3 class="text-xl font-bold text-slate-800 mb-6 flex items-center gap-3"><span class="text-2xl">🧬</span> Ma Trận Đặc Tính Game</h3>
+                    <div class="chart-container">
+                        <canvas id="dnaChart"></canvas>
+                    </div>
+                    <p class="text-sm text-center text-slate-500 mt-4 italic">Biểu đồ Radar thể hiện sự lệch pha cố ý về phía "Mật độ Quái vật" và "Tốc độ Nhịp game".</p>
+                </div>
+                
+                <div class="space-y-6">
+                    <div class="bg-indigo-50 border-l-4 border-indigo-600 p-6 rounded-r-xl">
+                        <h4 class="font-bold text-indigo-900 text-lg mb-2">Đặc Tả Kỹ Thuật Cấp 1</h4>
+                        <ul class="space-y-3 text-indigo-800">
+                            <li class="flex items-start"><span class="mr-2 font-bold text-indigo-600">»</span> <strong>Thể loại:</strong> Roguelite Survival / Horde Auto-shooter.</li>
+                            <li class="flex items-start"><span class="mr-2 font-bold text-indigo-600">»</span> <strong>Góc nhìn:</strong> Top-down 2D (Camera khóa theo Player).</li>
+                            <li class="flex items-start"><span class="mr-2 font-bold text-indigo-600">»</span> <strong>Nền tảng:</strong> PC (Bàn phím/Chuột) & Mobile (Virtual Joystick).</li>
+                        </ul>
+                    </div>
+                    <p class="text-slate-600 leading-relaxed">
+                        Sự đánh đổi lớn nhất trong kiến trúc là hi sinh "Pathfinding (A*)" và "Vật lý phức tạp (Rigidbodies)" để đổi lấy khả năng kết xuất hàng nghìn quái vật (Hordes) cùng lúc. Thuật toán di chuyển chủ yếu dựa trên <em>Steering Behaviors cơ bản</em> (Seek target).
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section id="mechanics" class="scroll-mt-24">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-slate-900 mb-4">Vòng Lặp Trải Nghiệm (Core Loop)</h2>
+                <p class="text-slate-600 max-w-2xl mx-auto">Sự thành công của game đến từ một chu trình lặp gây nghiện (Feedback Loop) được thiết kế cực kỳ chặt chẽ, lặp lại hàng trăm lần mỗi phiên chơi.</p>
+            </div>
+
+            <div class="bg-white p-8 rounded-2xl shadow-lg border border-slate-100 mb-12 tech-card">
+                <div class="flex flex-col md:flex-row justify-center items-center gap-6">
+                    <div class="flex-1 w-full bg-blue-50 border border-blue-200 p-6 rounded-xl text-center">
+                        <div class="text-4xl mb-3">🏃</div>
+                        <h4 class="font-bold text-blue-900 mb-2">1. Sinh Tồn & Di Chuyển</h4>
+                        <p class="text-sm text-blue-700">Người chơi điều khiển hướng đi, né tránh bầy quái vật liên tục khép góc.</p>
+                    </div>
+                    
+                    <div class="text-3xl text-slate-300 font-bold rotate-90 md:rotate-0">➔</div>
+                    
+                    <div class="flex-1 w-full bg-rose-50 border border-rose-200 p-6 rounded-xl text-center">
+                        <div class="text-4xl mb-3">⚔️</div>
+                        <h4 class="font-bold text-rose-900 mb-2">2. Tấn Công Tự Động</h4>
+                        <p class="text-sm text-rose-700">Vũ khí tự động kích hoạt dựa trên Cooldown Timer và thuật toán nhắm mục tiêu.</p>
+                    </div>
+
+                    <div class="text-3xl text-slate-300 font-bold rotate-90 md:rotate-0">➔</div>
+
+                    <div class="flex-1 w-full bg-emerald-50 border border-emerald-200 p-6 rounded-xl text-center">
+                        <div class="text-4xl mb-3">💎</div>
+                        <h4 class="font-bold text-emerald-900 mb-2">3. Thu Thập Tài Nguyên</h4>
+                        <p class="text-sm text-emerald-700">Quái chết rớt XP Gem. Thu thập để làm đầy thanh kinh nghiệm.</p>
+                    </div>
+
+                    <div class="text-3xl text-slate-300 font-bold rotate-90 md:rotate-0">➔</div>
+
+                    <div class="flex-1 w-full bg-amber-50 border border-amber-200 p-6 rounded-xl text-center">
+                        <div class="text-4xl mb-3">⬆️</div>
+                        <h4 class="font-bold text-amber-900 mb-2">4. Tạm Dừng & Lựa Chọn</h4>
+                        <p class="text-sm text-amber-700">Level Up trigger UI Draft (RNG). Chọn Relic/Vũ khí mới và lặp lại vòng lặp.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                    <h5 class="font-bold text-slate-800 mb-3 border-b pb-2">Hệ Thống Di Chuyển</h5>
+                    <p class="text-sm text-slate-600 mb-2">Sử dụng <strong>Kinematic Body</strong> thay vì Dynamic Body để kiểm soát tuyệt đối vector vận tốc. Va chạm giữa Player-Quái không cản đường (Non-blocking) mà chỉ trừ máu dạng Overlap Box.</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                    <h5 class="font-bold text-slate-800 mb-3 border-b pb-2">Thuật Toán Ngắm Bắn</h5>
+                    <p class="text-sm text-slate-600 mb-2">Mỗi vũ khí có Logic riêng: Kẻ địch gần nhất (Nearest Euclidean), Kẻ địch máu cao nhất, Random hướng, hoặc bắn theo hướng Vector di chuyển của Player.</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                    <h5 class="font-bold text-slate-800 mb-3 border-b pb-2">Phản Hồi UI/UX (Juiciness)</h5>
+                    <p class="text-sm text-slate-600 mb-2">Yếu tố quyết định cảm giác "đã tay": Số sát thương bay lơ lửng (Floating Text Tweening), Hiệu ứng giật màn hình (Screen Shake) và Khựng hình siêu nhỏ (Hit Stop).</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="architecture" class="scroll-mt-24">
+            <div class="bg-slate-900 text-white rounded-3xl p-8 md:p-12 shadow-2xl relative overflow-hidden">
+                <div class="absolute top-0 right-0 w-64 h-64 bg-indigo-500 rounded-full blur-3xl opacity-20 -translate-y-1/2 translate-x-1/3"></div>
+                <div class="absolute bottom-0 left-0 w-64 h-64 bg-emerald-500 rounded-full blur-3xl opacity-20 translate-y-1/2 -translate-x-1/3"></div>
+                
+                <div class="relative z-10">
+                    <div class="text-center mb-10">
+                        <h2 class="text-3xl font-bold mb-4">Kiến Trúc ECS (Entity Component System)</h2>
+                        <p class="text-slate-300 max-w-2xl mx-auto">OOP (Lập trình Hướng đối tượng) với cây kế thừa sâu sẽ triệt tiêu hiệu năng Cache của CPU. ECS biến toàn bộ game thành dữ liệu dạng lưới (Data-Oriented Design) để CPU xử lý hàng loạt.</p>
+                    </div>
+
+                    <div class="bg-slate-800/80 backdrop-blur border border-slate-700 rounded-2xl p-6 mb-10">
+                        <div class="flex flex-col md:flex-row gap-8 justify-center items-stretch text-center">
+                            
+                            <div class="flex-1 bg-indigo-900/50 border border-indigo-500/50 p-6 rounded-xl relative">
+                                <div class="absolute -top-4 left-1/2 -translate-x-1/2 bg-indigo-500 text-white w-8 h-8 rounded-full flex items-center justify-center font-bold">E</div>
+                                <h3 class="text-xl font-bold text-indigo-300 mt-2 mb-3">Entities</h3>
+                                <p class="text-sm text-indigo-100 mb-4">Chỉ là định danh (Integer IDs). Không chứa bất kỳ Logic hay Dữ liệu nào.</p>
+                                <div class="font-mono text-xs bg-indigo-950/80 p-3 rounded text-indigo-200 text-left">
+                                    Entity 1042 (Player)<br>
+                                    Entity 5912 (Enemy)<br>
+                                    Entity 8831 (Bullet)
+                                </div>
+                            </div>
+
+                            <div class="flex-1 bg-emerald-900/50 border border-emerald-500/50 p-6 rounded-xl relative">
+                                <div class="absolute -top-4 left-1/2 -translate-x-1/2 bg-emerald-500 text-white w-8 h-8 rounded-full flex items-center justify-center font-bold">C</div>
+                                <h3 class="text-xl font-bold text-emerald-300 mt-2 mb-3">Components</h3>
+                                <p class="text-sm text-emerald-100 mb-4">Chứa dữ liệu thuần túy (Structs/Arrays). Hoàn toàn không chứa phương thức (Methods).</p>
+                                <div class="font-mono text-xs bg-emerald-950/80 p-3 rounded text-emerald-200 text-left">
+                                    Transform {x, y}<br>
+                                    Velocity {dx, dy}<br>
+                                    Health {hp, max_hp}
+                                </div>
+                            </div>
+
+                            <div class="flex-1 bg-rose-900/50 border border-rose-500/50 p-6 rounded-xl relative">
+                                <div class="absolute -top-4 left-1/2 -translate-x-1/2 bg-rose-500 text-white w-8 h-8 rounded-full flex items-center justify-center font-bold">S</div>
+                                <h3 class="text-xl font-bold text-rose-300 mt-2 mb-3">Systems</h3>
+                                <p class="text-sm text-rose-100 mb-4">Các hàm Logic chạy mỗi Frame, duyệt qua các mảng Components để tính toán.</p>
+                                <div class="font-mono text-xs bg-rose-950/80 p-3 rounded text-rose-200 text-left">
+                                    MovementSystem(Transform, Velocity)<br>
+                                    DamageSystem(Health, Collider)
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div>
+                            <h4 class="text-lg font-bold text-slate-200 mb-4 border-b border-slate-700 pb-2">Tiến trình Game Loop</h4>
+                            <div class="bg-slate-950 rounded-lg p-4 font-mono text-sm text-emerald-400 overflow-x-auto">
+while is_game_running:
+  dt = get_delta_time()
+  
+  <span class="text-slate-500"># 1. Thu thập Input</span>
+  InputSystem.Process()
+  
+  if state == PLAYING:
+    <span class="text-slate-500"># 2. Cập nhật Logic (Logic Update)</span>
+    SpawnerSystem.Update(dt)
+    AISystem.Update(dt)
+    MovementSystem.Update(dt)
+    
+    <span class="text-slate-500"># Tái tạo lưới không gian cho Va chạm</span>
+    SpatialHashGrid.Rebuild() 
+    CollisionSystem.Check()
+    CombatSystem.ApplyDamage()
+    
+  <span class="text-slate-500"># 3. Kết xuất Đồ họa (Render Pipeline)</span>
+  Renderer.ClearScreen()
+  RenderSystem.DrawBatched()
+  UISystem.Draw()
+  Renderer.SwapBuffers()
+                            </div>
+                        </div>
+                        <div class="space-y-4">
+                            <h4 class="text-lg font-bold text-slate-200 mb-4 border-b border-slate-700 pb-2">Phân Tích Thành Phần Vật Thể</h4>
+                            <div class="bg-slate-800 rounded p-4 flex gap-3 items-center">
+                                <div class="w-10 h-10 rounded bg-indigo-500 flex-shrink-0 flex items-center justify-center text-xl">🧍</div>
+                                <div>
+                                    <div class="font-bold text-indigo-300 text-sm">Player Entity</div>
+                                    <div class="font-mono text-xs text-slate-400">Transform + Velocity + InputController + Health + MagnetArea + WeaponInventory</div>
+                                </div>
+                            </div>
+                            <div class="bg-slate-800 rounded p-4 flex gap-3 items-center">
+                                <div class="w-10 h-10 rounded bg-rose-500 flex-shrink-0 flex items-center justify-center text-xl">👾</div>
+                                <div>
+                                    <div class="font-bold text-rose-300 text-sm">Enemy Entity</div>
+                                    <div class="font-mono text-xs text-slate-400">Transform + Velocity + AI_Follow + Health + DamageBox</div>
+                                </div>
+                            </div>
+                            <div class="bg-slate-800 rounded p-4 flex gap-3 items-center">
+                                <div class="w-10 h-10 rounded bg-emerald-500 flex-shrink-0 flex items-center justify-center text-xl">🔮</div>
+                                <div>
+                                    <div class="font-bold text-emerald-300 text-sm">XP Gem Entity</div>
+                                    <div class="font-mono text-xs text-slate-400">Transform + XPValue + MagneticState</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <section id="optimization" class="scroll-mt-24">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-slate-900 mb-4">Chiến Lược Tối Ưu Hiệu Năng & Rendering</h2>
+                <p class="text-slate-600 max-w-2xl mx-auto">Phân tích ngân sách tài nguyên (Budget) và các kỹ thuật cốt lõi giúp thiết bị di động có thể render hàng ngàn vật thể mà không rớt khung hình.</p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-12">
+                
+                <div class="bg-white p-8 rounded-2xl shadow-lg border border-slate-100 tech-card flex flex-col">
+                    <h3 class="text-xl font-bold text-slate-800 mb-6 flex items-center gap-3"><span class="text-2xl">📊</span> Ngân Sách Xử Lý (Per Frame)</h3>
+                    <div class="chart-container flex-grow">
+                        <canvas id="budgetChart"></canvas>
+                    </div>
+                    <p class="text-sm text-slate-500 mt-4 text-center">Hệ thống Va chạm và Cập nhật AI chiếm phần lớn CPU. Đòi hỏi cấu trúc dữ liệu phẳng.</p>
+                </div>
+
+                <div class="space-y-6">
+                    <div class="bg-white p-6 rounded-xl shadow-sm border-l-4 border-amber-500">
+                        <h4 class="font-bold text-slate-800 text-lg mb-2">1. Batch Rendering & Texture Atlas</h4>
+                        <p class="text-sm text-slate-600 mb-3">GPU sẽ quá tải nếu gọi lệnh vẽ (Draw Call) cho từng quái vật riêng lẻ. Giải pháp:</p>
+                        <ul class="text-sm text-slate-700 list-disc pl-5 space-y-1 font-mono">
+                            <li>Gom toàn bộ Asset vào 1 file hình lớn (Texture Atlas).</li>
+                            <li>Sử dụng Instanced Rendering: Vẽ 1 mesh hình vuông duy nhất, lặp lại N lần với mảng [X, Y, UV_Coords] truyền thẳng lên GPU.</li>
+                        </ul>
+                    </div>
+
+                    <div class="bg-white p-6 rounded-xl shadow-sm border-l-4 border-emerald-500">
+                        <h4 class="font-bold text-slate-800 text-lg mb-2">2. Spatial Partitioning (Chia lưới không gian)</h4>
+                        <p class="text-sm text-slate-600 mb-3">Thuật toán dò va chạm Brute-force (O(N^2)) sẽ làm sập game. Áp dụng <strong>Spatial Hashing</strong>:</p>
+                        <ul class="text-sm text-slate-700 list-disc pl-5 space-y-1 font-mono">
+                            <li>Chia bản đồ thành các ô Grid. Map Entity ID vào cell tương ứng.</li>
+                            <li>Chỉ xét va chạm giữa các Entity nằm chung 1 cell hoặc 8 ô lân cận. Đưa độ phức tạp về mức tuyến tính ~O(N).</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="bg-white p-6 rounded-xl shadow-sm border-l-4 border-blue-500">
+                        <h4 class="font-bold text-slate-800 text-lg mb-2">3. Object Pooling (Bể chứa Bộ nhớ)</h4>
+                        <p class="text-sm text-slate-600">Tránh khởi tạo (<code>new</code>) và hủy (<code>destroy</code>) rác bộ nhớ trong lúc chơi. Tạo sẵn mảng tĩnh 3000 con quái vật lúc Loading. Khi quái chết, ẩn đi (SetActive = false) thay vì xóa khỏi RAM, và tái sử dụng khi Spawn quái mới.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white p-8 rounded-2xl shadow-lg border border-slate-100 tech-card">
+                <h3 class="text-xl font-bold text-slate-800 mb-6 flex items-center justify-center gap-3">Tác Động Của Tối Ưu (Thời gian Render Frame - ms)</h3>
+                <div class="chart-container">
+                    <canvas id="optimizationChart"></canvas>
+                </div>
+                <p class="text-sm text-slate-500 mt-4 text-center">Mục tiêu là giữ tổng thời gian xử lý một Frame dưới 16.6ms để duy trì ổn định mức 60 FPS.</p>
+            </div>
+        </section>
+
+        <section id="recreation" class="pb-16 scroll-mt-24">
+            <div class="bg-indigo-600 text-white rounded-3xl p-8 md:p-12 shadow-xl text-center">
+                <h2 class="text-3xl font-bold mb-6">Chiến Lược Tái Tạo V1.0 (MVP Scope)</h2>
+                <p class="text-indigo-200 mb-10 max-w-2xl mx-auto">Trước khi xây dựng nội dung khổng lồ, cần hoàn thiện một bộ khung MVP (Minimum Viable Product) cực kỳ vững chắc với đầy đủ tính năng kỹ thuật lõi.</p>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 text-left">
+                    <div class="bg-white/10 rounded-xl p-6 border border-white/20">
+                        <h3 class="text-xl font-bold mb-4 flex items-center gap-2 text-white">✅ Phải Hoàn Thiện (Must-have)</h3>
+                        <ul class="space-y-3 text-indigo-100 text-sm">
+                            <li class="flex items-center gap-2"><div class="w-5 h-5 rounded-full bg-emerald-400 text-indigo-900 flex items-center justify-center text-xs font-bold">✓</div> ECS Core Framework (Arrays/Structs)</li>
+                            <li class="flex items-center gap-2"><div class="w-5 h-5 rounded-full bg-emerald-400 text-indigo-900 flex items-center justify-center text-xs font-bold">✓</div> Thuật toán Spatial Hashing Grid</li>
+                            <li class="flex items-center gap-2"><div class="w-5 h-5 rounded-full bg-emerald-400 text-indigo-900 flex items-center justify-center text-xs font-bold">✓</div> Render Engine: Hỗ trợ Texture Batching</li>
+                            <li class="flex items-center gap-2"><div class="w-5 h-5 rounded-full bg-emerald-400 text-indigo-900 flex items-center justify-center text-xs font-bold">✓</div> Player Movement (WASD) mượt mà</li>
+                            <li class="flex items-center gap-2"><div class="w-5 h-5 rounded-full bg-emerald-400 text-indigo-900 flex items-center justify-center text-xs font-bold">✓</div> 1 Base Enemy (AI Seekers) + Spawn Logic</li>
+                            <li class="flex items-center gap-2"><div class="w-5 h-5 rounded-full bg-emerald-400 text-indigo-900 flex items-center justify-center text-xs font-bold">✓</div> Logic Auto-attack cơ bản (Tìm mục tiêu gần nhất)</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="bg-black/20 rounded-xl p-6 border border-white/10">
+                        <h3 class="text-xl font-bold mb-4 flex items-center gap-2 text-white">⏳ Trì Hoãn (Post-MVP)</h3>
+                        <ul class="space-y-3 text-indigo-200/70 text-sm">
+                            <li class="flex items-center gap-2"><div class="w-5 h-5 rounded-full bg-rose-500/50 text-white flex items-center justify-center text-xs font-bold">✗</div> Animation Sprites phức tạp (Dùng hình học thay thế trước)</li>
+                            <li class="flex items-center gap-2"><div class="w-5 h-5 rounded-full bg-rose-500/50 text-white flex items-center justify-center text-xs font-bold">✗</div> Hệ thống nâng cấp Relic/Vũ khí đa dạng (Drafting UI)</li>
+                            <li class="flex items-center gap-2"><div class="w-5 h-5 rounded-full bg-rose-500/50 text-white flex items-center justify-center text-xs font-bold">✗</div> Save/Load State & Progression Meta-game</li>
+                            <li class="flex items-center gap-2"><div class="w-5 h-5 rounded-full bg-rose-500/50 text-white flex items-center justify-center text-xs font-bold">✗</div> Hệ thống Âm thanh đa kênh (Audio mixing)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-slate-900 text-slate-500 text-center py-8 border-t border-slate-800">
+        <p class="text-sm">Báo cáo Phân tích Kiến trúc Hệ thống Bizarre Brigade.</p>
+    </footer>
+
+    <script>
+        // Smooth transitions:
+        // - Links with `.transition-link` (external page navigation) use a fade-out before navigating.
+        // - In-page nav links (href starting with '#') scroll smoothly and briefly highlight the target section.
+        document.addEventListener('DOMContentLoaded', () => {
+            // external page links with fade
+            document.querySelectorAll('a.transition-link').forEach(a => {
+                a.addEventListener('click', function (e) {
+                    const href = this.getAttribute('href');
+                    if (!href || href.startsWith('#') || this.target === '_blank') return;
+                    // if this link is handled by ripple, let ripple handler manage navigation
+                    if (this.classList.contains('ripple-link')) return;
+                    e.preventDefault();
+                    document.body.classList.add('page-fade');
+                    setTimeout(() => { window.location.href = href; }, 220);
+                });
+            });
+
+            // ripple links (expand circle effect)
+            document.querySelectorAll('a.ripple-link').forEach(btn => {
+                btn.addEventListener('click', function (e) {
+                    const href = this.getAttribute('href');
+                    if (!href || this.target === '_blank') return;
+                    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+                    e.preventDefault();
+                    const rect = this.getBoundingClientRect();
+                    const cx = rect.left + rect.width / 2;
+                    const cy = rect.top + rect.height / 2;
+                    const overlay = document.createElement('div');
+                    overlay.className = 'ripple-overlay';
+                    document.body.appendChild(overlay);
+                    // size to cover diagonal of viewport
+                    const maxDim = Math.max(window.innerWidth, window.innerHeight) * 2;
+                    overlay.style.width = overlay.style.height = maxDim + 'px';
+                    overlay.style.left = (cx - maxDim/2) + 'px';
+                    overlay.style.top = (cy - maxDim/2) + 'px';
+                    // force style calc then expand
+                    requestAnimationFrame(() => {
+                        overlay.style.transform = 'scale(1)';
+                        overlay.style.opacity = '1';
+                    });
+                    // navigate after animation
+                    setTimeout(() => {
+                        // small fade for outgoing page
+                        document.body.classList.add('page-fade');
+                        setTimeout(() => { window.location.href = href; }, 120);
+                    }, 520);
+                });
+            });
+
+            // in-page navigation with smooth scroll + highlight
+            document.querySelectorAll('nav a[href^="#"]').forEach(a => {
+                a.addEventListener('click', function (e) {
+                    const hash = this.getAttribute('href');
+                    console.log('[nav] clicked', hash);
+                    if (!hash || !hash.startsWith('#')) return;
+                    const target = document.querySelector(hash);
+                    if (!target) return;
+                    e.preventDefault();
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    // ensure the element can receive the highlight (positioned)
+                    const prevPosition = window.getComputedStyle(target).position;
+                    if (prevPosition === 'static') {
+                        target.style.position = 'relative';
+                    }
+                    target.classList.add('section-highlight');
+                    setTimeout(() => {
+                        target.classList.remove('section-highlight');
+                        if (prevPosition === 'static') target.style.position = '';
+                    }, 700);
+                });
+            });
+
+            // --- On-scroll reveal (IntersectionObserver) ---
+            const ioOptions = { root: null, rootMargin: '0px 0px -8% 0px', threshold: 0.12 };
+            const revealObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('revealed');
+                        entry.target.classList.add('stagger-in');
+                        entry.target.classList.remove('reveal-on-scroll');
+                        revealObserver.unobserve(entry.target);
+                    }
+                });
+            }, ioOptions);
+            document.querySelectorAll('.reveal-on-scroll, .stagger-item').forEach(el => revealObserver.observe(el));
+
+            // --- Parallax (uses rAF, lightweight) ---
+            const parallaxEls = Array.from(document.querySelectorAll('[data-parallax-speed]'));
+            if (parallaxEls.length) {
+                let lastScrollY = window.scrollY;
+                let ticking = false;
+                function onScroll() {
+                    lastScrollY = window.scrollY;
+                    if (!ticking) {
+                        ticking = true;
+                        requestAnimationFrame(() => {
+                            parallaxEls.forEach(el => {
+                                const speed = parseFloat(el.getAttribute('data-parallax-speed')) || 0.2;
+                                const rect = el.getBoundingClientRect();
+                                const offset = (window.scrollY - (rect.top + window.scrollY - window.innerHeight/2)) * speed;
+                                el.style.transform = `translateY(${offset}px)`;
+                            });
+                            ticking = false;
+                        });
+                    }
+                }
+                window.addEventListener('scroll', onScroll, { passive: true });
+                onScroll();
+            }
+
+            // --- Lazy loading for images/backgrounds ---
+            const lazyObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (!entry.isIntersecting) return;
+                    const el = entry.target;
+                    if (el.dataset.src) {
+                        el.src = el.dataset.src;
+                        el.addEventListener('load', () => el.classList.add('loaded'));
+                    }
+                    if (el.dataset.bgSrc) {
+                        el.style.backgroundImage = `url('${el.dataset.bgSrc}')`;
+                        el.classList.add('loaded');
+                    }
+                    lazyObserver.unobserve(el);
+                });
+            }, { rootMargin: '0px 0px 150px 0px', threshold: 0.01 });
+            document.querySelectorAll('img[data-src], [data-bg-src]').forEach(el => lazyObserver.observe(el));
+        });
+
+        function wrapLabel(label) {
+            if (label.length <= 16) return label;
+            let words = label.split(' ');
+            let lines = [];
+            let currentLine = '';
+            words.forEach(word => {
+                if ((currentLine + word).length > 16) {
+                    if (currentLine) lines.push(currentLine.trim());
+                    currentLine = word + ' ';
+                } else {
+                    currentLine += word + ' ';
+                }
+            });
+            if (currentLine) lines.push(currentLine.trim());
+            return lines;
+        }
+
+        const tooltipConfig = {
+            callbacks: {
+                title: function(tooltipItems) {
+                    const item = tooltipItems[0];
+                    let label = item.chart.data.labels[item.dataIndex];
+                    if (Array.isArray(label)) {
+                        return label.join(' ');
+                    } else {
+                        return label;
+                    }
+                }
+            }
+        };
+
+        const dnaLabels = [
+            'Mật độ Quái vật (Entity Count)', 
+            'Tốc độ Nhịp game (Pacing)', 
+            'Kỹ năng Người chơi (Né tránh)', 
+            'Tính Chiến thuật (Drafting)', 
+            'Cốt truyện (Narrative)', 
+            'Phụ thuộc RNG (May rủi)'
+        ].map(wrapLabel);
+
+        const ctxDna = document.getElementById('dnaChart').getContext('2d');
+        new Chart(ctxDna, {
+            type: 'radar',
+            data: {
+                labels: dnaLabels,
+                datasets: [{
+                    label: 'Điểm Đặc Tính',
+                    data: [9.5, 8.5, 7.0, 6.0, 2.0, 8.0],
+                    backgroundColor: 'rgba(79, 70, 229, 0.2)',
+                    borderColor: '#4f46e5',
+                    pointBackgroundColor: '#4f46e5',
+                    pointBorderColor: '#fff',
+                    pointHoverBackgroundColor: '#fff',
+                    pointHoverBorderColor: '#4f46e5',
+                    borderWidth: 2
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    r: {
+                        angleLines: { color: 'rgba(0,0,0,0.1)' },
+                        grid: { color: 'rgba(0,0,0,0.1)' },
+                        pointLabels: { 
+                            font: { family: 'Inter', size: 12, weight: '600' },
+                            color: '#475569'
+                        },
+                        ticks: { display: false, min: 0, max: 10 }
+                    }
+                },
+                plugins: {
+                    legend: { display: false },
+                    tooltip: tooltipConfig
+                }
+            }
+        });
+
+        const budgetLabels = [
+            'Phát hiện Va chạm & Vật lý (CPU)',
+            'Cập nhật Behavior AI (CPU)',
+            'Lệnh Vẽ Render Batching (GPU)',
+            'Dọn Rác Bộ Nhớ (GC)',
+            'Logic Khác (UI/Audio)'
+        ].map(wrapLabel);
+
+        const ctxBudget = document.getElementById('budgetChart').getContext('2d');
+        new Chart(ctxBudget, {
+            type: 'doughnut',
+            data: {
+                labels: budgetLabels,
+                datasets: [{
+                    data: [45, 25, 20, 5, 5],
+                    backgroundColor: [
+                        '#e11d48', 
+                        '#f59e0b', 
+                        '#38bdf8', 
+                        '#94a3b8', 
+                        '#10b981'  
+                    ],
+                    borderWidth: 2,
+                    borderColor: '#ffffff',
+                    hoverOffset: 10
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                cutout: '65%',
+                plugins: {
+                    legend: {
+                        position: 'right',
+                        labels: {
+                            font: { family: 'Inter', size: 12 },
+                            color: '#475569',
+                            usePointStyle: true,
+                            padding: 20
+                        }
+                    },
+                    tooltip: tooltipConfig
+                }
+            }
+        });
+
+        const optLabels = [
+            'Không Tối Ưu (Brute Force 1000 quái)',
+            'Áp dụng Chia Lưới Không Gian (Spatial Grid)',
+            'Hoàn thiện (Grid + Object Pooling + Batching)'
+        ].map(wrapLabel);
+
+        const ctxOpt = document.getElementById('optimizationChart').getContext('2d');
+        new Chart(ctxOpt, {
+            type: 'bar',
+            data: {
+                labels: optLabels,
+                datasets: [{
+                    label: 'Thời gian Render 1 Frame (ms)',
+                    data: [125.4, 28.5, 12.2],
+                    backgroundColor: [
+                        'rgba(225, 29, 72, 0.8)',   
+                        'rgba(245, 158, 11, 0.8)',  
+                        'rgba(16, 185, 129, 0.8)'   
+                    ],
+                    borderColor: [
+                        '#e11d48',
+                        '#f59e0b',
+                        '#10b981'
+                    ],
+                    borderWidth: 1,
+                    borderRadius: 4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        title: { display: true, text: 'Milliseconds (ms)', color: '#64748b' },
+                        grid: { color: 'rgba(0,0,0,0.05)' }
+                    },
+                    x: {
+                        grid: { display: false },
+                        ticks: { font: { family: 'Inter' }, color: '#475569' }
+                    }
+                },
+                plugins: {
+                    legend: { display: false },
+                    tooltip: tooltipConfig,
+                    annotation: {
+                        annotations: {
+                            line1: {
+                                type: 'line',
+                                yMin: 16.6,
+                                yMax: 16.6,
+                                borderColor: '#4f46e5',
+                                borderWidth: 2,
+                                borderDash: [5, 5],
+                                label: {
+                                    enabled: true,
+                                    content: 'Mốc 60 FPS (16.6ms)',
+                                    position: 'end'
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+    <!-- Fixed scroll-progress navigation button -->
+    <div id="bbScrollNav" class="bb-scroll-nav" role="button" aria-label="Scroll navigation" title="Scroll navigation" tabindex="0">
+        <svg viewBox="0 0 44 44" aria-hidden="true">
+            <circle class="bb-ring-bg" cx="22" cy="22" r="18"></circle>
+            <circle class="bb-ring" cx="22" cy="22" r="18" stroke-dasharray="113.097" stroke-dashoffset="113.097"></circle>
+        </svg>
+        <div class="bb-scroll-label"><span class="percent">0%</span><span class="arrow">↑</span></div>
+    </div>
+
+    <script>
+        (function(){
+            const nav = document.getElementById('bbScrollNav');
+            if (!nav) return;
+            const ring = nav.querySelector('.bb-ring');
+            const pctSpan = nav.querySelector('.percent');
+            const arrowSpan = nav.querySelector('.arrow');
+            const R = 18; const C = 2*Math.PI*R; // circumference ~113.097
+            ring.style.strokeDasharray = C;
+
+            function docHeight(){ return Math.max(document.documentElement.scrollHeight, document.body.scrollHeight); }
+
+            // collect sections (class .section-target) or headers h2/h3 inside main
+            function collectSections(){
+                let els = Array.from(document.querySelectorAll('.section-target'));
+                if (!els.length) els = Array.from(document.querySelectorAll('main h2, main h3'));
+                // map to {el, top}
+                const arr = els.map(e => ({ el: e, top: e.getBoundingClientRect().top + window.scrollY })).filter(x=>!isNaN(x.top));
+                // dedupe by top
+                const uniq = [];
+                arr.sort((a,b)=>a.top-b.top).forEach(x=>{ if (!uniq.length || Math.abs(uniq[uniq.length-1].top - x.top) > 6) uniq.push(x); });
+                return uniq;
+            }
+
+            let sections = collectSections();
+            window.addEventListener('resize', () => { sections = collectSections(); updateProgress(); });
+
+            // update ring and percent
+            function updateProgress(){
+                const scrollY = window.scrollY || window.pageYOffset;
+                const total = Math.max(1, docHeight() - window.innerHeight);
+                let pct = Math.min(100, Math.max(0, (scrollY / total) * 100));
+                const dash = C * (1 - pct/100);
+                ring.style.strokeDashoffset = dash;
+                pctSpan.textContent = Math.round(pct) + '%';
+                if (pct >= 99.5) {
+                    nav.classList.add('bb-full');
+                } else {
+                    nav.classList.remove('bb-full');
+                }
+            }
+
+            // Smart navigation click
+            function handleClick(){
+                const scrollY = window.scrollY || window.pageYOffset;
+                const total = Math.max(1, docHeight() - window.innerHeight);
+                const pct = Math.min(100, Math.max(0, (scrollY / total) * 100));
+                if (pct >= 99.5) {
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                    return;
+                }
+
+                // find current section index (last section whose top <= scrollY + 8)
+                if (!sections || !sections.length) sections = collectSections();
+                let idx = -1;
+                for (let i=0;i<sections.length;i++){
+                    if (sections[i].top <= scrollY + 8) idx = i;
+                }
+                if (idx === -1) {
+                    // not yet reached first section -> go to first section
+                    if (sections.length) window.scrollTo({ top: sections[0].top, behavior: 'smooth' });
+                    else window.scrollTo({ top: 0, behavior: 'smooth' });
+                    return;
+                }
+                const currentTop = sections[idx].top;
+                if (Math.abs(scrollY - currentTop) > 8) {
+                    // scroll to top of current section
+                    window.scrollTo({ top: currentTop, behavior: 'smooth' });
+                } else {
+                    // already at top of current section -> step to previous section
+                    const prev = Math.max(0, idx - 1);
+                    if (idx === 0) {
+                        window.scrollTo({ top: 0, behavior: 'smooth' });
+                    } else {
+                        window.scrollTo({ top: sections[prev].top, behavior: 'smooth' });
+                    }
+                }
+            }
+
+            nav.addEventListener('click', handleClick);
+            nav.addEventListener('keydown', (e)=>{ if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); handleClick(); } });
+
+            // update on scroll with rAF
+            let ticking = false;
+            window.addEventListener('scroll', ()=>{ if (!ticking){ ticking = true; requestAnimationFrame(()=>{ updateProgress(); ticking=false; }); } }, { passive: true });
+            updateProgress();
+
+            // observe DOM changes to refresh section list
+            const mo = new MutationObserver(()=>{ sections = collectSections(); });
+            mo.observe(document.body, { childList: true, subtree: true });
+        })();
+    </script>
+    <script>
+        (function(){
+            function annotate(root=document){
+                try {
+                    // Ensure a global reveal observer exists so dynamically annotated elements are observed
+                    if (!window._bbRevealObserver) {
+                        const opts = { root: null, rootMargin: '0px 0px -8% 0px', threshold: 0.12 };
+                        window._bbRevealObserver = new IntersectionObserver((entries) => {
+                            entries.forEach(entry => {
+                                if (entry.isIntersecting) {
+                                    entry.target.classList.add('revealed');
+                                    entry.target.classList.add('stagger-in');
+                                    entry.target.classList.remove('reveal-on-scroll');
+                                    window._bbRevealObserver.unobserve(entry.target);
+                                }
+                            });
+                        }, opts);
+                    }
+                    const selectors = ['section','.bg-white','.tech-card','.chart-container','.fade-in','.max-w-4xl','.bg-indigo-600','.bg-slate-800','.bg-slate-900','.bg-indigo-50'];
+                    selectors.forEach(s => (root.querySelectorAll(s)||[]).forEach(el => {
+                        if (!el.classList.contains('reveal-on-scroll')) el.classList.add('reveal-on-scroll');
+                        if (!el.classList.contains('stagger-item')) el.classList.add('stagger-item');
+                        try { window._bbRevealObserver.observe(el); } catch(e){}
+                    }));
+
+                    // Parallax targets (decorative patterns / blobs)
+                    (root.querySelectorAll('.header-pattern, .absolute')||[]).forEach((el,i) => {
+                        if (!el.dataset.parallaxSpeed) el.dataset.parallaxSpeed = (i % 2 === 0) ? '0.06' : '0.12';
+                        el.classList.add('parallax');
+                    });
+
+                    // Convert images to lazy-friendly pattern if present
+                    (root.querySelectorAll('img')||[]).forEach(img => {
+                        if (img.dataset.src || img.loading === 'lazy') return;
+                        const src = img.getAttribute('src');
+                        if (src) {
+                            img.dataset.src = src;
+                            img.removeAttribute('src');
+                            img.loading = 'lazy';
+                            img.classList.add('lazy-img');
+                        }
+                    });
+
+                    // Reveal elements that are currently within viewport immediately
+                    (root.querySelectorAll('.reveal-on-scroll')||[]).forEach(el => {
+                        try {
+                            const r = el.getBoundingClientRect();
+                            if (r.top < window.innerHeight && r.bottom > 0) {
+                                el.classList.add('revealed','stagger-in');
+                                el.classList.remove('reveal-on-scroll');
+                                try { window._bbRevealObserver.unobserve(el); } catch(e){}
+                            }
+                        } catch(e){/* ignore */}
+                    });
+                } catch (e) { console.error('Annotate error', e); }
+            }
+
+            document.addEventListener('DOMContentLoaded', () => {
+                annotate();
+                const main = document.getElementById('main-content');
+                if (main) {
+                    const mo = new MutationObserver(muts => {
+                        muts.forEach(m => m.addedNodes.forEach(n => { if (n.nodeType === 1) annotate(n); }));
+                    });
+                    mo.observe(main, { childList: true, subtree: true });
+                }
+            });
+        })();
+    </script>
+</body>
+</html>

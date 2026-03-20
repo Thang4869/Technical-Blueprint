@@ -1,0 +1,220 @@
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: #f8fafc;
+    color: #0f172a;
+}
+.font-mono {
+    font-family: 'Fira Code', monospace;
+}
+.chart-container {
+    position: relative;
+    width: 100%;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+    height: 350px;
+    max-height: 400px;
+}
+@media (min-width: 768px) {
+    .chart-container {
+        height: 400px;
+    }
+}
+.gradient-text {
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-image: linear-gradient(to right, #4f46e5, #e11d48);
+}
+.tech-card {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.tech-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+}
+.header-pattern {
+    background-image: radial-gradient(#4f46e5 1px, transparent 1px);
+    background-size: 30px 30px;
+}
+
+/* Centralized transition variables and page-fade helper
+   - Uses a namespaced variable to avoid colliding with other projects.
+   - Both HTML files fall back to --transition-duration if present. */
+:root {
+    --bb-transition-duration: 220ms;
+}
+
+.page-fade {
+    opacity: 0;
+    transition: opacity var(--bb-transition-duration) ease;
+}
+
+/* Backward-compat: define --transition-duration if not set, pointing to our namespaced value */
+:root {
+    --transition-duration: var(--bb-transition-duration);
+}
+
+/* Section highlight when navigating via in-page nav */
+.section-highlight {
+    animation: bb-section-highlight 700ms ease;
+}
+
+@keyframes bb-section-highlight {
+    0% { box-shadow: 0 0 0 8px rgba(79,70,229,0.14); background-color: rgba(79,70,229,0.06); }
+    40% { box-shadow: 0 0 18px 8px rgba(79,70,229,0.12); background-color: rgba(79,70,229,0.04); }
+    100% { box-shadow: none; background-color: transparent; }
+}
+
+/* Stronger fallback highlight (in case background-color is overridden) */
+.section-highlight::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    border-radius: inherit;
+    box-shadow: 0 0 0 0 rgba(79,70,229,0.12);
+    animation: bb-section-after 700ms ease;
+}
+
+@keyframes bb-section-after {
+    0% { box-shadow: 0 0 0 6px rgba(79,70,229,0.18); }
+    60% { box-shadow: 0 0 18px 10px rgba(79,70,229,0.10); }
+    100% { box-shadow: none; }
+}
+
+/* Neon glow for primary CTA */
+.cta-glow {
+    box-shadow: 0 6px 20px rgba(99,102,241,0.18), 0 0 0 0 rgba(99,102,241,0.0);
+    transition: box-shadow 220ms ease, transform 160ms ease;
+    will-change: transform, box-shadow;
+}
+.cta-glow:hover {
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: 0 12px 40px rgba(124,58,237,0.28), 0 0 30px rgba(124,58,237,0.22);
+}
+
+/* Ripple overlay that expands from button to cover viewport */
+.ripple-overlay {
+    position: fixed;
+    border-radius: 50%;
+    pointer-events: none;
+    background: radial-gradient(circle at center, rgba(99,102,241,0.96), rgba(99,102,241,0.86));
+    transform: scale(0);
+    opacity: 1;
+    transition: transform 520ms cubic-bezier(0.22, 1, 0.36, 1), opacity 260ms ease-out;
+    will-change: transform, opacity;
+    z-index: 9999;
+}
+
+/* Slide up + fade-in for target page content */
+.page-enter-from-bottom {
+    transform: translateY(18px);
+    opacity: 0;
+}
+.page-enter-to {
+    transform: translateY(0);
+    opacity: 1;
+    transition: transform 420ms cubic-bezier(0.22, 1, 0.36, 1), opacity 320ms ease-out;
+}
+
+/* Sidebar slide-in for `a.html` */
+.sidebar-hidden { transform: translateX(-100%); }
+.sidebar-enter { transform: translateX(0); transition: transform 420ms cubic-bezier(0.22, 1, 0.36, 1); will-change: transform; }
+
+/* Back button zoom-out effect (when navigating back to home) */
+.zoom-out-target {
+    transform-origin: center center;
+    transition: transform 420ms cubic-bezier(0.22, 1, 0.36, 1), opacity 260ms ease-out;
+}
+.zoom-out-active { transform: scale(0.92); opacity: 0.0; }
+
+/* Staggered entrance for cards/charts */
+.stagger-item { opacity: 0; transform: scale(0.96) translateY(6px); will-change: transform, opacity; }
+.stagger-in { opacity: 1; transform: scale(1) translateY(0); transition: transform 360ms cubic-bezier(0.22, 1, 0.36, 1), opacity 260ms ease-out; }
+
+/* Reveal on scroll initial state */
+.reveal-on-scroll { opacity: 0; transform: translateY(14px) scale(0.98); transition: transform 420ms cubic-bezier(0.22,1,0.36,1), opacity 360ms ease-out; will-change: transform, opacity; }
+.reveal-on-scroll.revealed { opacity: 1; transform: translateY(0) scale(1); }
+
+/* Parallax helper: element should have position relative/absolute and will be transformed on scroll */
+.parallax { will-change: transform; transform: translateY(0); }
+
+/* Lazy image fade-in */
+.lazy-img { opacity: 0; transition: opacity 360ms ease-out; }
+.lazy-img.loaded { opacity: 1; }
+
+/* Fixed scroll-progress navigation button (bottom-right) */
+.bb-scroll-nav {
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    width: 64px;
+    height: 64px;
+    display: inline-grid;
+    place-items: center;
+    border-radius: 9999px;
+    background: rgba(255,255,255,0.04);
+    -webkit-backdrop-filter: blur(6px);
+    backdrop-filter: blur(6px);
+
+/* Error overlay styles moved from inline attributes in a.html/b.html */
+#bb-error-overlay {
+    display: none;
+    position: fixed;
+    inset: 12px;
+    z-index: 10000;
+    background: rgba(255,255,255,0.98);
+    color: #111;
+    padding: 18px;
+    border-radius: 8px;
+    box-shadow: 0 12px 40px rgba(2,6,23,0.2);
+    font-family: Inter, system-ui, Arial, sans-serif;
+    overflow: auto;
+    max-height: calc(100vh - 48px);
+}
+
+.bb-error-title {
+    margin: 0 0 8px 0;
+    color: #b91c1c;
+}
+
+.bb-error-pre {
+    white-space: pre-wrap;
+    font-family: inherit;
+    color: #111;
+}
+    border: 1px solid rgba(255,255,255,0.06);
+    box-shadow: 0 6px 18px rgba(2,6,23,0.12);
+    z-index: 9998;
+    cursor: pointer;
+    transition: transform 180ms ease, box-shadow 180ms ease, background 180ms ease;
+}
+.bb-scroll-nav:hover { transform: translateY(-4px) scale(1.02); background: rgba(255,255,255,0.06); }
+.bb-scroll-nav:active { transform: translateY(-2px) scale(0.995); }
+
+.bb-scroll-nav svg { width:44px; height:44px; display:block; }
+.bb-scroll-nav .bb-scroll-label { position: absolute; display:flex; align-items:center; justify-content:center; width:100%; height:100%; pointer-events:none; font-weight:700; color: #eef2ff; font-size:12px; }
+.bb-scroll-nav .bb-scroll-label .arrow { display:none; font-size:16px; line-height:1; }
+.bb-scroll-nav:hover .bb-scroll-label .percent { display:none; }
+.bb-scroll-nav:hover .bb-scroll-label .arrow { display:inline-block; }
+
+/* When full (bottom), always show arrow and slightly brighter */
+.bb-scroll-nav.bb-full { background: rgba(79,70,229,0.92); color: white; border-color: rgba(79,70,229,0.18); }
+.bb-scroll-nav.bb-full .bb-scroll-label .percent { display:none; }
+.bb-scroll-nav.bb-full .bb-scroll-label .arrow { display:inline-block; color: white; }
+
+/* SVG progress ring styles */
+.bb-ring-bg { fill: none; stroke: rgba(255,255,255,0.06); stroke-width: 4; }
+.bb-ring { fill: none; stroke: #7c3aed; stroke-width: 4; stroke-linecap: round; transform-origin: 50% 50%; transform: rotate(-90deg); }
+
+@media (prefers-reduced-motion: reduce) {
+    .bb-scroll-nav, .bb-scroll-nav svg { transition: none; }
+}
+
+/* Improve contrast for visible percentage label on light backgrounds */
+.bb-scroll-nav .bb-scroll-label .percent {
+    color: #0f172a; /* dark slate for high contrast on white */
+    font-weight: 800;
+    text-shadow: none;
+}

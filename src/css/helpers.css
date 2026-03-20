@@ -1,0 +1,22 @@
+/* helpers.css — animations, reveal, stagger, lazy-loading, parallax */
+
+/* Section highlight when navigating via in-page nav */
+.section-highlight { animation: bb-section-highlight 700ms ease; }
+@keyframes bb-section-highlight { 0% { box-shadow: 0 0 0 8px rgba(79,70,229,0.14); background-color: rgba(79,70,229,0.06); } 40% { box-shadow: 0 0 18px 8px rgba(79,70,229,0.12); background-color: rgba(79,70,229,0.04); } 100% { box-shadow: none; background-color: transparent; } }
+.section-highlight::after { content: ''; position: absolute; inset: 0; pointer-events: none; border-radius: inherit; box-shadow: 0 0 0 0 rgba(79,70,229,0.12); animation: bb-section-after 700ms ease; }
+@keyframes bb-section-after { 0% { box-shadow: 0 0 0 6px rgba(79,70,229,0.18); } 60% { box-shadow: 0 0 18px 10px rgba(79,70,229,0.10); } 100% { box-shadow: none; } }
+
+/* Staggered entrance for cards/charts */
+.stagger-item { opacity: 0; transform: scale(0.96) translateY(6px); will-change: transform, opacity; }
+.stagger-in { opacity: 1; transform: scale(1) translateY(0); transition: transform 360ms cubic-bezier(0.22,1,0.36,1), opacity 260ms ease-out; }
+
+/* Reveal on scroll initial state */
+.reveal-on-scroll { opacity: 0; transform: translateY(14px) scale(0.98); transition: transform 420ms cubic-bezier(0.22,1,0.36,1), opacity 360ms ease-out; will-change: transform, opacity; }
+.reveal-on-scroll.revealed { opacity: 1; transform: translateY(0) scale(1); }
+
+/* Parallax helper */
+.parallax { will-change: transform; transform: translateY(0); }
+
+/* Lazy image fade-in */
+.lazy-img { opacity: 0; transition: opacity 360ms ease-out; }
+.lazy-img.loaded { opacity: 1; }

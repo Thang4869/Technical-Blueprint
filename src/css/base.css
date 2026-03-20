@@ -1,0 +1,5 @@
+@import "components.css";
+@import "helpers.css";
+
+/* Optional: import global root styles if needed */
+@import "../../styles.css";
