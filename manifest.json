@@ -1,0 +1,25 @@
+{
+  "name": "Bizarre Brigade — Technical Blueprint",
+  "short_name": "BizarreBrigade",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0f172a",
+  "theme_color": "#0f172a",
+  "icons": [
+    {
+      "src": "/favicon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/favicon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+    ,{
+      "src": "/favicon.ico",
+      "sizes": "64x64 128x128",
+      "type": "image/x-icon"
+    }
+  ]
+}
