@@ -44,4 +44,4 @@ npx serve . -l 8000
 - Tạo PR (tiêu đề + body), hoặc tự động commit & push các thay đổi, hoặc sinh danh sách issue/ticket từ từng mục kỹ thuật.
 
 ---
-_Bản README này được tối ưu để giới thiệu nhanh và tạo động lực cho việc triển khai — sẵn sàng mở rộng thành tài liệu developer chi tiết khi cần._
+_Bản README này được tối ưu để giới thiệu nhanh và tạo động lực cho việc triển khai — sẵn sàng mở rộng thành tài liệu developer chi tiết khi cần!_
