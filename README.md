@@ -44,23 +44,4 @@ npx serve . -l 8000
 - Tạo PR (tiêu đề + body), hoặc tự động commit & push các thay đổi, hoặc sinh danh sách issue/ticket từ từng mục kỹ thuật.
 
 ---
-_Bản README này được tối ưu để giới thiệu nhanh và tạo động lực cho việc triển khai — sẵn sàng mở rộng thành tài liệu developer chi tiết khi cần._
-
-## Triển khai lên GitHub Pages (nhanh)
-
-1. Tạo repository trên GitHub và push toàn bộ thư mục dự án vào `main` (hoặc `master`).
-2. Trong repository Settings → Pages: chọn branch `main` và folder `/ (root)` rồi nhấn Save.
-3. Vì bạn muốn dùng domain tùy chỉnh `wint4869.studio`, tôi đã thêm file `CNAME` ở gốc repo chứa `wint4869.studio` — commit/push file này.
-4. Trỏ DNS của domain đến GitHub Pages (apex domain): thêm 4 A-records cho IPs sau:
-
-```
-185.199.108.153
-185.199.109.153
-185.199.110.153
-185.199.111.153
-```
-
-5. Sau vài phút (có thể tới vài giờ), quay lại Settings → Pages và bật HTTPS (chứng chỉ Let's Encrypt).
-6. Kiểm tra trang chính đã hiển thị `https://wint4869.studio/`. Nếu muốn sử dụng nhánh/thu mục `docs/` thay vì root, chọn folder `docs` trong phần Pages.
-
-Gợi ý: bạn đã có `index.html` ở gốc (chuyển hướng tới `b.html`) và file `CNAME`. Sau khi push, GitHub Pages sẽ phục vụ trang ở root domain.
+_Bản README này được tối ưu để giới thiệu nhanh và tạo động lực cho việc triển khai — sẵn sàng mở rộng thành tài liệu developer chi tiết khi cần!_
