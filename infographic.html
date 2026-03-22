@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bizarre Brigade | Technical Infographic</title>
     <meta name="description" content="Phân tích kỹ thuật và blueprint để tái tạo Bizarre Brigade — một roguelite auto-shooter tập trung vào hiệu năng và ECS architecture.">
-    <meta name="theme-color" content="#0f172a">
+    <meta name=" theme-color" content="#0f172a">
     <link rel="icon" href="/favicon.ico">
     <link rel="manifest" href="/manifest.json">
     <meta name="msapplication-TileColor" content="#0f172a">
@@ -24,9 +24,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&family=Fira+Code:wght@500&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="src/css/base.css">
-    <link rel="stylesheet" href="src/css/components.css">
-    <link rel="stylesheet" href="src/css/helpers.css">
+    <link rel="stylesheet" href="styles.css">
     
     <!-- Chosen Palette: Energetic & Playful (Indigo, Emerald, Rose, Amber) -->
     <!-- Application Structure Plan: The SPA is structured as a vertical scrolling infographic to guide the user through a logical narrative: Game Overview -> Core Mechanics -> Technical Architecture -> Performance Optimization -> Recreation MVP. This linear flow ensures technical concepts (like ECS and Spatial Hashing) are introduced after the basic game context is established. A sticky header provides context, while Material Design cards segment information cleanly. -->
@@ -57,17 +55,45 @@
     </script>
 
     <nav class="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-slate-200 shadow-sm">
-        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center">
             <div class="flex items-center gap-2">
                 <div class="w-8 h-8 rounded bg-indigo-600 text-white flex items-center justify-center font-bold text-lg shadow-lg">B</div>
                 <span class="font-bold text-xl tracking-tight text-slate-800">Bizarre Brigade<span class="text-indigo-600">.</span></span>
             </div>
-            <div class="hidden md:flex gap-6 text-sm font-semibold text-slate-500">
-                <a href="#overview" class="hover:text-indigo-600 transition-colors">Tổng Quan</a>
-                <a href="#mechanics" class="hover:text-indigo-600 transition-colors">Cơ Chế</a>
-                <a href="#architecture" class="hover:text-indigo-600 transition-colors">Kiến Trúc</a>
-                <a href="#optimization" class="hover:text-indigo-600 transition-colors">Tối Ưu</a>
-                <a href="a.html" class="hover:text-indigo-600 transition-colors font-semibold text-indigo-600">Khám Phá Chi tiết</a>
+
+            <!-- center nav removed — will place nav next to language toggle on the right -->
+
+            <div class="flex-1 flex justify-end items-center gap-3 pr-6">
+                <div class="hidden md:flex gap-6 text-sm font-semibold text-slate-500" id="nav-links">
+                    <a href="#overview" class="hover:text-indigo-600 transition-colors">Tổng Quan</a>
+                    <a href="#mechanics" class="hover:text-indigo-600 transition-colors">Cơ Chế</a>
+                    <a href="#architecture" class="hover:text-indigo-600 transition-colors">Kiến Trúc</a>
+                    <a href="#optimization" class="hover:text-indigo-600 transition-colors">Tối Ưu</a>
+                    <a href="#contact" class="hover:text-indigo-600 transition-colors">Liên hệ</a>
+                </div>
+
+                <div class="lang-toggle ml-4" role="group" aria-label="Chọn ngôn ngữ">
+                    <button id="langVi" class="lang-btn" aria-pressed="false" aria-label="Tiếng Việt">
+                        <svg class="flag" viewBox="0 0 60 40" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+                            <rect width="60" height="40" fill="#da251d"/>
+                            <polygon points="30,9 34,23 48,23 36,31 40,45 30,36 20,45 24,31 12,23 26,23" fill="#ffde00" transform="translate(0,-6) scale(0.9)"/>
+                        </svg>
+                        <span class="visually-hidden">VI</span>
+                    </button>
+                    <button id="langEn" class="lang-btn" aria-pressed="false" aria-label="English">
+                        <svg class="flag" viewBox="0 0 60 40" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+                            <rect width="60" height="40" fill="#b22234"/>
+                            <g fill="#fff">
+                                <rect y="4" width="60" height="4"/>
+                                <rect y="12" width="60" height="4"/>
+                                <rect y="20" width="60" height="4"/>
+                                <rect y="28" width="60" height="4"/>
+                                <rect x="0" y="0" width="26" height="16" fill="#3c3b6e"/>
+                            </g>
+                        </svg>
+                        <span class="visually-hidden">EN</span>
+                    </button>
+                </div>
             </div>
         </div>
     </nav>
@@ -95,7 +121,7 @@
                 </div>
             </div>
             <div class="mt-8">
-                <a id="exploreBtn" href="a.html" class="ripple-link transition-link cta-glow inline-block bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-3 px-6 rounded-lg shadow-lg">Khám phá chi tiết</a>
+                <a id="exploreBtn" href="deep-dive.html" class="ripple-link transition-link cta-glow inline-block bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-3 px-6 rounded-lg shadow-lg">Khám phá chi tiết</a>
             </div>
         </div>
     </header>
@@ -446,28 +472,52 @@ while is_game_running:
                 });
             });
 
-            // in-page navigation with smooth scroll + highlight
-            document.querySelectorAll('nav a[href^="#"]').forEach(a => {
-                a.addEventListener('click', function (e) {
-                    const hash = this.getAttribute('href');
-                    console.log('[nav] clicked', hash);
+            // in-page navigation with smooth scroll + highlight + URL hash handling
+            (function(){
+                const navLinks = Array.from(document.querySelectorAll('nav a[href^="#"]'));
+                function goToHash(hash, options = {highlight: true, push: true, smooth: true}){
                     if (!hash || !hash.startsWith('#')) return;
                     const target = document.querySelector(hash);
                     if (!target) return;
-                    e.preventDefault();
-                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                    // ensure the element can receive the highlight (positioned)
-                    const prevPosition = window.getComputedStyle(target).position;
-                    if (prevPosition === 'static') {
-                        target.style.position = 'relative';
+                    if (options.smooth) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    else target.scrollIntoView({ block: 'start' });
+
+                    if (options.highlight) {
+                        const prevPosition = window.getComputedStyle(target).position;
+                        if (prevPosition === 'static') target.style.position = 'relative';
+                        target.classList.add('section-highlight');
+                        setTimeout(() => {
+                            target.classList.remove('section-highlight');
+                            if (prevPosition === 'static') target.style.position = '';
+                        }, 700);
                     }
-                    target.classList.add('section-highlight');
-                    setTimeout(() => {
-                        target.classList.remove('section-highlight');
-                        if (prevPosition === 'static') target.style.position = '';
-                    }, 700);
+
+                    if (options.push) {
+                        try { history.pushState(null, '', hash); } catch (e) { location.hash = hash; }
+                    }
+                }
+
+                navLinks.forEach(a => {
+                    a.addEventListener('click', function (e){
+                        const hash = this.getAttribute('href');
+                        if (!hash || !hash.startsWith('#')) return;
+                        e.preventDefault();
+                        goToHash(hash, { highlight: true, push: true, smooth: true });
+                    });
                 });
-            });
+
+                // Handle back/forward navigation
+                window.addEventListener('popstate', () => {
+                    const hash = location.hash || '#overview';
+                    goToHash(hash, { highlight: true, push: false, smooth: false });
+                });
+
+                // On initial load, respect existing hash
+                if (location.hash) {
+                    // small timeout to allow layout and images to settle
+                    setTimeout(() => { goToHash(location.hash, { highlight: true, push: false, smooth: false }); }, 60);
+                }
+            })();
 
             // --- On-scroll reveal (IntersectionObserver) ---
             const ioOptions = { root: null, rootMargin: '0px 0px -8% 0px', threshold: 0.12 };
@@ -524,6 +574,31 @@ while is_game_running:
                 });
             }, { rootMargin: '0px 0px 150px 0px', threshold: 0.01 });
             document.querySelectorAll('img[data-src], [data-bg-src]').forEach(el => lazyObserver.observe(el));
+
+            // --- Language toggle initialization ---
+            (function(){
+                try {
+                    const btnVi = document.getElementById('langVi');
+                    const btnEn = document.getElementById('langEn');
+                    if (!btnVi || !btnEn) return;
+
+                    function setLang(code){
+                        document.documentElement.lang = code;
+                        localStorage.setItem('bb-lang', code);
+                        btnVi.classList.toggle('active', code === 'vi');
+                        btnEn.classList.toggle('active', code === 'en');
+                        btnVi.setAttribute('aria-pressed', code === 'vi');
+                        btnEn.setAttribute('aria-pressed', code === 'en');
+                    }
+
+                    const stored = localStorage.getItem('bb-lang');
+                    const initial = stored || document.documentElement.lang || 'vi';
+                    setLang(initial);
+
+                    btnVi.addEventListener('click', () => setLang('vi'));
+                    btnEn.addEventListener('click', () => setLang('en'));
+                } catch (e) { /* silent */ }
+            })();
         });
 
         function wrapLabel(label) {

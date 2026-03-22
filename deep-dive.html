@@ -16,16 +16,14 @@
          4. Optimization: Accordion/Toggle Lists -> Hide/show deep technical details to reduce cognitive load. -->
     <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
 
-    <link rel="stylesheet" href="src/css/base.css">
-    <link rel="stylesheet" href="src/css/components.css">
-    <link rel="stylesheet" href="src/css/helpers.css">
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body class="bg-slate-50 text-slate-800 h-screen flex overflow-hidden">
 
     <!-- Sidebar Navigation -->
     <aside class="w-64 bg-white border-r border-slate-200 flex flex-col h-full flex-shrink-0 z-20 absolute md:relative transform -translate-x-full md:translate-x-0 transition-transform duration-300" id="sidebar">
         <div class="p-6 border-b border-slate-200 flex justify-between items-center">
-            <a href="b.html" class="transition-link block">
+            <a href="infographic.html" class="transition-link block">
                 <h1 class="text-xl font-bold text-slate-900 tracking-tight">Bizarre Brigade</h1>
                 <p class="text-xs text-slate-500 font-mono mt-1">v1.0.0 Architecture</p>
             </a>
@@ -266,27 +264,28 @@
                         <div class="bg-slate-800 text-slate-100 p-6 rounded-xl shadow-sm font-mono text-sm">
                             <h3 class="font-bold text-lg mb-4 text-emerald-400 font-sans border-b border-slate-700 pb-2">Main Game Loop Structure</h3>
                             <pre class="whitespace-pre-wrap"><code>while is_running:
-  dt = calculate_delta_time()
-  
-  # 1. Input Processing
-  process_inputs()
-  
-  if state == PLAYING:
-    # 2. Logic Update (Fixed Timestep suggested for physics)
-    spawn_system.update(dt)
-    ai_system.update(dt)
-    movement_system.update(dt)
-    spatial_hash.rebuild() # Update grid collision
-    collision_system.update() # Broadphase -> Narrowphase
-    combat_system.update() # Calculate HP, apply damage
-    death_system.update() # Return to pool, drop XP
-    
-  # 3. Render Pipeline
-  renderer.clear()
-  renderer.draw_background()
-  renderer.draw_entities_batched(sorted_by_y_for_depth)
-  renderer.draw_ui(state)
-  renderer.swap_buffers()</code></pre>
+                                dt = calculate_delta_time()
+                                
+                                # 1. Input Processing
+                                process_inputs()
+                                
+                                if state == PLAYING:
+                                    # 2. Logic Update (Fixed Timestep suggested for physics)
+                                    spawn_system.update(dt)
+                                    ai_system.update(dt)
+                                    movement_system.update(dt)
+                                    spatial_hash.rebuild() # Update grid collision
+                                    collision_system.update() # Broadphase -> Narrowphase
+                                    combat_system.update() # Calculate HP, apply damage
+                                    death_system.update() # Return to pool, drop XP
+                                    
+                                # 3. Render Pipeline
+                                renderer.clear()
+                                renderer.draw_background()
+                                renderer.draw_entities_batched(sorted_by_y_for_depth)
+                                renderer.draw_ui(state)
+                                renderer.swap_buffers()</code>
+                            </pre>
                         </div>
                     </div>
                 `
@@ -524,50 +523,6 @@
                     </div>
                 `
             },
-            output: {
-                id: 'output',
-                title: 'Phần 8: Chuẩn bị Prompt tiếp theo',
-                icon: '📝',
-                content: `
-                    <div class="max-w-4xl mx-auto fade-in">
-                        <h2 class="text-3xl font-bold text-slate-900 mb-6">Output cho Prompt tiếp theo</h2>
-                        <p class="text-slate-600 mb-6">Dưới đây là danh sách phân rã hệ thống. Sử dụng block này làm Input cho LLM ở lần prompt tiếp theo để bắt đầu generate code thực tế.</p>
-
-                        <div class="space-y-6">
-                            <div class="bg-indigo-50 p-5 rounded-lg border border-indigo-200">
-                                <h3 class="font-bold text-indigo-900 mb-2">1. Cấu trúc Prompt đề xuất (Copy & Paste)</h3>
-                                <div class="bg-white p-4 rounded font-mono text-xs text-slate-800 border border-slate-300 whitespace-pre-wrap">Đóng vai trò là Python/JS Game Developer. Dựa trên kiến trúc ECS và Object Pooling, hãy viết mã nguồn cho [MODULE_NAME].
-Ràng buộc:
-- Viết thành file độc lập hoặc class có thể plug-and-play.
-- Comment giải thích logic.
-- Không dùng external library quá nặng.</div>
-                            </div>
-
-                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                <div>
-                                    <h3 class="font-bold text-slate-800 mb-2 border-b pb-1">2. Danh sách Module Code cần tạo</h3>
-                                    <ul class="list-disc pl-5 text-sm text-slate-600 space-y-1 font-mono">
-                                        <li>Core_GameLoop.py</li>
-                                        <li>System_ObjectPool.py</li>
-                                        <li>System_SpatialGrid.py</li>
-                                        <li>Component_Manager.py</li>
-                                        <li>Entity_Player.py</li>
-                                        <li>System_Collision.py</li>
-                                    </ul>
-                                </div>
-                                <div>
-                                    <h3 class="font-bold text-slate-800 mb-2 border-b pb-1">3. Danh sách Asset cần generate code</h3>
-                                    <ul class="list-disc pl-5 text-sm text-slate-600 space-y-1">
-                                        <li>Hàm generate base Map (Background lưới kẻ ô).</li>
-                                        <li>Hệ thống vẽ Particle hạt vụn nổ bằng Primitives.</li>
-                                        <li>Hàm generate Sprite hình học cơ bản thay thế cho Player/Enemy giai đoạn MVP.</li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                `
-            }
         };
 
         // --- APP STATE & LOGIC ---
@@ -750,7 +705,7 @@ Ràng buộc:
         }
 
         // Initialize
-        // Smooth transition + UI entrance effects for a.html
+        // Smooth transition + UI entrance effects for deep-dive.html
         document.addEventListener('DOMContentLoaded', () => {
             // keep existing transition-link behavior
             document.querySelectorAll('a.transition-link').forEach(a => {
@@ -779,16 +734,16 @@ Ràng buộc:
                 backBtn.addEventListener('click', (e) => {
                     e.preventDefault();
                     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-                        window.location.href = 'b.html';
+                        window.location.href = 'infographic.html';
                         return;
                     }
                     // animate main area zooming out slightly then navigate
                     const main = document.querySelector('main');
                     if (main) {
                         main.classList.add('zoom-out-active');
-                        setTimeout(() => { window.location.href = 'b.html'; }, 340);
+                        setTimeout(() => { window.location.href = 'infographic.html'; }, 340);
                     } else {
-                        window.location.href = 'b.html';
+                        window.location.href = 'infographic.html';
                     }
                 });
             }
