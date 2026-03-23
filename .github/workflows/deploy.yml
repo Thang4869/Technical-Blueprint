@@ -1,15 +1,14 @@
-name: Deploy site (src/html → gh-pages)
+name: Deploy to GitHub Pages
 
 on:
   push:
-    branches:
-      - main
-    paths:
-      - 'src/html/**'
+    branches: [ main ]
   workflow_dispatch:
 
 permissions:
-  contents: write
+  contents: read
+  pages: write
+  id-token: write
 
 jobs:
   deploy:
@@ -17,16 +16,24 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-        with:
-          persist-credentials: true
 
-      - name: Deploy to gh-pages
-        uses: peaceiris/actions-gh-pages@v3
+      # Nếu cần build bước tĩnh (ví dụ dùng node), thêm bước build ở đây.
+      # Ví dụ (nếu bạn có bước build):
+      # - name: Setup Node
+      #   uses: actions/setup-node@v4
+      #   with:
+      #     node-version: '18'
+      # - name: Install and Build
+      #   run: |
+      #     npm ci
+      #     npm run build
+      #
+      # Giả sử output build hoặc nội dung tĩnh bạn muốn publish là trong src/html
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v1
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./src/html
-          publish_branch: gh-pages
-          user_name: 'github-actions[bot]'
-          user_email: 'github-actions[bot]@users.noreply.github.com'
-          # optional:
-          # commit_message: "ci: deploy site from src/html"
+          path: src/html
+
+      - name: Deploy to GitHub Pages
+        uses: actions/deploy-pages@v1
