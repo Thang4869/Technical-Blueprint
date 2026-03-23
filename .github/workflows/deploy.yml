@@ -4,6 +4,12 @@ on:
   push:
     branches:
       - main
+    paths:
+      - 'src/html/**'
+  workflow_dispatch:
+
+permissions:
+  contents: write
 
 jobs:
   deploy:
@@ -12,7 +18,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
         with:
-          persist-credentials: false
+          persist-credentials: true
 
       - name: Deploy to gh-pages
         uses: peaceiris/actions-gh-pages@v3
@@ -22,3 +28,5 @@ jobs:
           publish_branch: gh-pages
           user_name: 'github-actions[bot]'
           user_email: 'github-actions[bot]@users.noreply.github.com'
+          # optional:
+          # commit_message: "ci: deploy site from src/html"
