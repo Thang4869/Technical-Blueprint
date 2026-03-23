@@ -3,6 +3,8 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches: [ main ]
+    paths:
+      - 'src/html/**'   # chỉ deploy khi thay đổi thực sự
   workflow_dispatch:
 
 permissions:
@@ -13,22 +15,10 @@ permissions:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-
-      # Debug step — in production bạn có thể remove
-      - name: Debug: list src/html
-        run: |
-          echo "Repo root:"
-          ls -la
-          echo "src/html:"
-          ls -la src/html || true
-          echo "Head of index.html (if exists):"
-          head -n 40 src/html/index.html || true
-
-      # Nếu cần build (npm / vite / hugo...) thêm bước build ở đây.
-      # Giả sử nội dung tĩnh bạn muốn publish là src/html (đã sẵn sàng)
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v1
