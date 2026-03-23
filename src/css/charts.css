@@ -1,0 +1,17 @@
+/* charts.css — styles for chart containers and responsive adjustments */
+.chart-container {
+    position: relative;
+    width: 100%;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+    height: 350px;
+    max-height: 400px;
+}
+
+/* Increase chart height on larger screens for better visibility */
+@media (min-width: 768px) {
+    .chart-container {
+        height: 400px;
+    }
+}

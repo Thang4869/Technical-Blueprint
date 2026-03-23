@@ -1,0 +1,22 @@
+/* base.css — foundational styles and global variables */
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: #f8fafc;
+    color: #0f172a;
+}
+
+/* Global CSS variables for consistent theming and easy maintenance */
+:root {
+    --bb-transition-duration: 220ms;
+}
+
+/* Page fade-in effect for smooth transitions between sections */
+.page-fade {
+    opacity: 0;
+    transition: opacity var(--bb-transition-duration) ease;
+}
+
+/* Utility classes for common styles and effects */
+:root {
+    --transition-duration: var(--bb-transition-duration);
+}

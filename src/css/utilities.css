@@ -1,0 +1,15 @@
+/* utilities.css — utility classes for typography, gradients, and accessibility */
+.font-mono {
+    font-family: 'Fira Code', monospace;
+}
+
+/* Gradient text utility class for applying a vibrant gradient effect to text elements, enhancing visual appeal and drawing attention to important headings or key information */
+.gradient-text {
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-image: linear-gradient(to right, #4f46e5, #e11d48);
+}
+
+/* Visually hidden class for accessibility, allowing content to be hidden visually while still being accessible to screen readers and assistive technologies */
+.visually-hidden { position: absolute !important; height: 1px; width: 1px; overflow: hidden; clip: rect(1px, 1px, 1px, 1px); white-space: nowrap; border: 0; padding: 0; margin: -1px; }
