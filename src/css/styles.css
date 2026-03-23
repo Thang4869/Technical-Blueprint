@@ -1,0 +1,13 @@
+/* styles.css — main stylesheet that imports all other CSS files for the project, serving as the central point for managing and organizing styles across the entire site */
+@import "./base.css";
+@import "./utilities.css";
+@import "./charts.css";
+@import "./cards.css";
+@import "./forms.css";
+@import "./header.css";
+@import "./nav.css";
+@import "./components-general.css";
+@import "./cta.css";
+@import "./layout.css";
+@import "./scrollnav.css";
+@import "./helpers.css";
