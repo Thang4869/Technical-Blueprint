@@ -26,17 +26,17 @@ document.addEventListener('DOMContentLoaded', () => {
     if (backBtn) {
         backBtn.addEventListener('click', (e) => {
             e.preventDefault();
-            if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-                window.location.href = 'infographic.html';
+                if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                window.location.href = '../infographic/';
                 return;
             }
             // animate main area zooming out slightly then navigate
             const main = document.querySelector('main');
-            if (main) {
+                if (main) {
                 main.classList.add('zoom-out-active');
-                setTimeout(() => { window.location.href = 'infographic.html'; }, 340);
+                setTimeout(() => { window.location.href = '../infographic/'; }, 340);
             } else {
-                window.location.href = 'infographic.html';
+                window.location.href = '../infographic/';
             }
         });
     }

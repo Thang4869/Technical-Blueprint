@@ -1,8 +1,6 @@
-// Deep Dive - Annotate / Reveal Observer
-(function(){
+export function initAnnotate() {
     function annotate(root=document){
         try {
-            // Ensure a global reveal observer exists for dynamic elements
             if (!window._bbRevealObserver) {
                 const opts = { root: null, rootMargin: '0px 0px -8% 0px', threshold: 0.12 };
                 window._bbRevealObserver = new IntersectionObserver((entries) => {
@@ -23,13 +21,11 @@
                 try { window._bbRevealObserver.observe(el); } catch(e){}
             }));
 
-            // Parallax targets (decorative patterns / blobs)
             (root.querySelectorAll('.header-pattern, .absolute')||[]).forEach((el,i) => {
                 if (!el.dataset.parallaxSpeed) el.dataset.parallaxSpeed = (i % 2 === 0) ? '0.06' : '0.12';
                 el.classList.add('parallax');
             });
 
-            // Convert images to lazy-friendly pattern if present
             (root.querySelectorAll('img')||[]).forEach(img => {
                 if (img.dataset.src || img.loading === 'lazy') return;
                 const src = img.getAttribute('src');
@@ -41,7 +37,6 @@
                 }
             });
 
-            // Reveal elements already in viewport immediately
             (root.querySelectorAll('.reveal-on-scroll')||[]).forEach(el => {
                 try {
                     const r = el.getBoundingClientRect();
@@ -55,14 +50,14 @@
         } catch (e) { console.error('Annotate error', e); }
     }
 
-    document.addEventListener('DOMContentLoaded', () => {
-        annotate();
-        const main = document.getElementById('main-content');
-        if (main) {
-            const mo = new MutationObserver(muts => {
-                muts.forEach(m => m.addedNodes.forEach(n => { if (n.nodeType === 1) annotate(n); }));
-            });
-            mo.observe(main, { childList: true, subtree: true });
-        }
-    });
-})();
+    annotate();
+    const main = document.getElementById('main-content');
+    if (main) {
+        const mo = new MutationObserver(muts => {
+            muts.forEach(m => m.addedNodes.forEach(n => { if (n.nodeType === 1) annotate(n); }));
+        });
+        mo.observe(main, { childList: true, subtree: true });
+    }
+}
+
+export default initAnnotate;

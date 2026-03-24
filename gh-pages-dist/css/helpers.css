@@ -1,0 +1,32 @@
+/* helpers.css — utility classes for animations, staggered entrances, parallax effects, and lazy image loading */
+.section-highlight { animation: bb-section-highlight 700ms ease; }
+
+/* Keyframes for section highlight effect, creating a subtle glow and background color change to draw attention to new sections as they enter the viewport */
+@keyframes bb-section-highlight { 0% { box-shadow: 0 0 0 8px rgba(79,70,229,0.14); background-color: rgba(79,70,229,0.06); } 40% { box-shadow: 0 0 18px 8px rgba(79,70,229,0.12); background-color: rgba(79,70,229,0.04); } 100% { box-shadow: none; background-color: transparent; } }
+
+/* After pseudo-element for section highlight, creating a layered effect with a fading glow to enhance the visual emphasis on new sections */
+.section-highlight::after { content: ''; position: absolute; inset: 0; pointer-events: none; border-radius: inherit; box-shadow: 0 0 0 0 rgba(79,70,229,0.12); animation: bb-section-after 700ms ease; }
+
+/* Keyframes for the after pseudo-element of section highlight, creating a fading glow effect that complements the main highlight animation and adds depth to the visual emphasis on new sections */
+@keyframes bb-section-after { 0% { box-shadow: 0 0 0 6px rgba(79,70,229,0.18); } 60% { box-shadow: 0 0 18px 10px rgba(79,70,229,0.10); } 100% { box-shadow: none; } }
+
+/* Staggered entrance utility classes for animating elements in sequence, creating a dynamic and engaging user experience as content appears on the page */
+.stagger-item { opacity: 0; transform: scale(0.96) translateY(6px); will-change: transform, opacity; }
+
+/* Staggered entrance animation class to be added when elements should animate in, creating a smooth and visually appealing sequence as content loads or enters the viewport */
+.stagger-in { opacity: 1; transform: scale(1) translateY(0); transition: transform 360ms cubic-bezier(0.22,1,0.36,1), opacity 260ms ease-out; }
+
+/* Reveal on scroll utility class for animating elements as they enter the viewport, creating a subtle and engaging effect that draws attention to content as users scroll through the page */
+.reveal-on-scroll { opacity: 0; transform: translateY(14px) scale(0.98); transition: transform 420ms cubic-bezier(0.22,1,0.36,1), opacity 360ms ease-out; will-change: transform, opacity; }
+
+/* Reveal on scroll active class to be added when elements are revealed, creating a smooth and visually appealing entrance effect as content becomes visible in the viewport */
+.reveal-on-scroll.revealed { opacity: 1; transform: translateY(0) scale(1); }
+
+/* Parallax utility class for elements that should have a parallax scrolling effect, creating a sense of depth and movement as users scroll through the page */
+.parallax { will-change: transform; transform: translateY(0); }
+
+/* Parallax active class to be added when elements should move with the parallax effect, creating a dynamic and immersive scrolling experience as content moves at different speeds based on scroll position */
+.lazy-img { opacity: 0; transition: opacity 360ms ease-out; }
+
+/* Loaded class for lazy images to fade them in smoothly as they finish loading, enhancing the visual experience and reducing perceived load times */
+.lazy-img.loaded { opacity: 1; }

@@ -1,33 +1,5 @@
-function wrapLabel(label) {
-    if (label.length <= 16) return label;
-    let words = label.split(' ');
-    let lines = [];
-    let currentLine = '';
-    words.forEach(word => {
-        if ((currentLine + word).length > 16) {
-            if (currentLine) lines.push(currentLine.trim());
-            currentLine = word + ' ';
-        } else {
-            currentLine += word + ' ';
-        }
-    });
-    if (currentLine) lines.push(currentLine.trim());
-    return lines;
-}
-
-const tooltipConfig = {
-    callbacks: {
-        title: function(tooltipItems) {
-            const item = tooltipItems[0];
-            let label = item.chart.data.labels[item.dataIndex];
-            if (Array.isArray(label)) {
-                return label.join(' ');
-            } else {
-                return label;
-            }
-        }
-    }
-};
+import { wrapLabel } from './charts.helpers.js';
+import { tooltipConfig } from './charts.tooltip.js';
 
 export function initCharts() {
     try {
