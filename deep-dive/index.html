@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bizarre Brigade | Technical Analysis & Recreation Blueprint</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <!-- Chosen Palette: Slate (Neutrals) + Indigo (Primary) + Emerald (Success/Optimization) -->
+    <!-- Application Structure Plan: A Dashboard-style SPA. Sidebar navigation allows quick jumping between the 8 technical sections. This avoids a massive wall of text and lets the developer focus on specific implementation domains (e.g., just Architecture or just Optimization). Interactive elements include tab switching, expandable code/logic cards, and Chart.js visualizations for performance budgeting and entity composition. -->
+    <!-- Visualization & Content Choices: 
+         1. Overview: Radar Chart (Chart.js) -> Compare game attributes (Pacing, Tactical depth) -> Quick visual summary. 
+         2. Entity Breakdown: Doughnut Chart (Chart.js) -> Show active entity distribution -> Highlight optimization needs for swarms.
+         3. Architecture: CSS Grid Diagram -> Visualize ECS structure -> Interactive hover states for components -> NO SVG/Mermaid used. 
+         4. Optimization: Accordion/Toggle Lists -> Hide/show deep technical details to reduce cognitive load. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+
+    <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body class="bg-slate-50 text-slate-800 h-screen flex overflow-hidden">
+
+    <!-- Sidebar Navigation -->
+    <aside class="w-64 bg-white border-r border-slate-200 flex flex-col h-full flex-shrink-0 z-20 absolute md:relative transform -translate-x-full md:translate-x-0 transition-transform duration-300" id="sidebar">
+        <div class="p-6 border-b border-slate-200 flex justify-between items-center">
+            <a href="../infographic/" class="transition-link block">
+                <h1 class="text-xl font-bold text-slate-900 tracking-tight">Bizarre Brigade</h1>
+                <p class="text-xs text-slate-500 font-mono mt-1">v1.0.0 Architecture</p>
+            </a>
+            <button id="backHomeBtn" title="Home" class="ml-2 text-slate-500 hover:text-slate-800 hidden md:inline-flex items-center justify-center w-8 h-8 rounded">
+                🏠
+            </button>
+            <button class="md:hidden text-slate-500 hover:text-slate-800 font-bold text-xl" onclick="toggleSidebar()">✕</button>
+        </div>
+        <nav class="flex-1 overflow-y-auto py-4" id="nav-menu">
+        </nav>
+        <div class="p-4 border-t border-slate-200 text-xs text-slate-400 text-center">
+            Technical Analyst / System Architect
+        </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="flex-1 flex flex-col h-full overflow-hidden relative">
+        <!-- Mobile Header -->
+        <header class="md:hidden bg-white border-b border-slate-200 p-4 flex items-center">
+            <button class="text-slate-600 hover:text-slate-900 mr-4 text-2xl" onclick="toggleSidebar()">☰</button>
+            <h1 class="text-lg font-bold text-slate-900 truncate">Bizarre Brigade Analysis</h1>
+        </header>
+
+        <!-- Content Container -->
+        <div class="flex-1 overflow-y-auto p-6 md:p-10" id="main-content">
+        </div>
+    </main>
+
+    <!-- Overlay for mobile sidebar -->
+    <div class="fixed inset-0 bg-slate-900/50 z-10 hidden md:hidden" id="sidebar-overlay" onclick="toggleSidebar()"></div>
+
+    <!-- Fixed scroll-progress navigation button -->
+    <div id="bbScrollNav" class="bb-scroll-nav" role="button" aria-label="Scroll navigation" title="Scroll navigation" tabindex="0">
+        <svg viewBox="0 0 44 44" aria-hidden="true">
+            <circle class="bb-ring-bg" cx="22" cy="22" r="18"></circle>
+            <circle class="bb-ring" cx="22" cy="22" r="18" stroke-dasharray="113.097" stroke-dashoffset="113.097"></circle>
+        </svg>
+        <div class="bb-scroll-label"><span class="percent">0%</span><span class="arrow">↑</span></div>
+    </div>
+    <div id="bb-error-overlay"></div>
+    <script src="../js/deep-dive/deep-dive.data.overview.js" defer></script>
+    <script src="../js/deep-dive/deep-dive.data.mechanics.js" defer></script>
+    <script src="../js/deep-dive/deep-dive.data.architecture.js" defer></script>
+    <script src="../js/deep-dive/deep-dive.data.rendering.js" defer></script>
+    <script src="../js/deep-dive/deep-dive.data.asset_strategy.js" defer></script>
+    <script src="../js/deep-dive/deep-dive.data.optimization.js" defer></script>
+    <script src="../js/deep-dive/deep-dive.data.recreation.js" defer></script>
+    <script src="../js/deep-dive/deep-dive.data.js" defer></script>
+    <script src="../js/deep-dive/deep-dive.charts.core.js" defer></script>
+    <script src="../js/deep-dive/deep-dive.charts.overview.js" defer></script>
+    <script src="../js/deep-dive/deep-dive.charts.pipeline.js" defer></script>
+    <script src="../js/deep-dive/deep-dive.ui.js" defer></script>
+    <script src="../js/deep-dive/deep-dive.dom.js" defer></script>
+    <script src="../js/deep-dive/deep-dive.scrollnav.core.js" defer></script>
+    <script src="../js/deep-dive/deep-dive.scrollnav.handlers.js" defer></script>
+    <script src="../js/deep-dive/deep-dive.scrollnav.init.js" defer></script>
+    <script src="../js/deep-dive/deep-dive.annotate.js" defer></script>
+    <script src="../js/deep-dive/deep-dive.errorOverlay.js" defer></script>
+</body>
+</html>
