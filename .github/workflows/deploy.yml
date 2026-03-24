@@ -4,11 +4,12 @@ on:
   push:
     branches: [ main ]
     paths:
-      - 'src/html/**'   # chỉ deploy khi thay đổi thực sự
+      - 'src/html/**'   # only deploy when html changes
   workflow_dispatch:
 
+# Required permissions for the deploy step
 permissions:
-  contents: read
+  contents: write
   pages: write
   id-token: write
 
@@ -19,6 +20,9 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          # Keep checkout credentials so the deploy action can push.
+          persist-credentials: true
 
       - name: Prepare pretty URLs
         run: |
