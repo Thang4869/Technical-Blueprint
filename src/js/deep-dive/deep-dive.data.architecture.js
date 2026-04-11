@@ -2,12 +2,12 @@
     window.__dd_sections__ = window.__dd_sections__ || {};
     window.__dd_sections__.architecture = {
         id: 'architecture',
-        title: 'Phần 3: Kiến trúc Hệ thống',
+        title: '<span lang="vi">Phần 3: Kiến trúc Hệ thống</span><span lang="en">Part 3: System Architecture</span>',
         icon: '🏗',
         content: `
                     <div class="max-w-4xl mx-auto fade-in">
                         <h2 class="text-3xl font-bold text-slate-900 mb-4">System Architecture (ECS Approach)</h2>
-                        <p class="text-slate-600 mb-6">Đối với game thể loại Horde Survival (hàng ngàn entities trên màn hình), OOP truyền thống (Deep inheritance) sẽ gây crash cache CPU. <strong>Entity Component System (ECS)</strong> là bắt buộc.</p>
+                        <p class="text-slate-600 mb-6"><span lang="vi">Đối với game thể loại Horde Survival (hàng ngàn entities trên màn hình), OOP truyền thống (Deep inheritance) sẽ gây crash cache CPU.</span><span lang="en">For Horde Survival games (thousands of entities on the screen), traditional OOP (Deep inheritance) will cause CPU cache crashes.</span> <strong>Entity Component System (ECS)</strong> <span lang="vi">là bắt buộc.</span><span lang="en">is required.</span></p>
 
                         <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm mb-8">
                             <h3 class="font-bold text-lg mb-4 text-center">Data-Oriented Design (ECS Blueprint)</h3>
@@ -22,21 +22,21 @@
                                 <div class="bg-indigo-100 border border-indigo-300 rounded p-4 flex flex-col items-center ecs-block">
                                     <div class="w-12 h-12 rounded-full bg-indigo-500 text-white flex items-center justify-center font-bold mb-2">E</div>
                                     <h4 class="font-bold text-indigo-900">Entities</h4>
-                                    <p class="text-xs text-indigo-700 mt-2">Chỉ là các Integer IDs (e.g., ID: 1042).</p>
+                                    <p class="text-xs text-indigo-700 mt-2"><span lang="vi">Chỉ là các Integer IDs (e.g., ID: 1042).</span><span lang="en">Just Integer IDs (e.g., ID: 1042).</span></p>
                                 </div>
 
                                 <!-- Components -->
                                 <div class="bg-emerald-100 border border-emerald-300 rounded p-4 flex flex-col items-center ecs-block">
                                     <div class="w-12 h-12 rounded-full bg-emerald-500 text-white flex items-center justify-center font-bold mb-2">C</div>
                                     <h4 class="font-bold text-emerald-900">Components</h4>
-                                    <p class="text-xs text-emerald-700 mt-2">Dữ liệu thuần túy (Struct/Data Class).</p>
+                                    <p class="text-xs text-emerald-700 mt-2"><span lang="vi">Dữ liệu thuần túy (Struct/Data Class).</span><span lang="en">Pure data (Struct/Data Class).</span></p>
                                 </div>
 
                                 <!-- Systems -->
                                 <div class="bg-rose-100 border border-rose-300 rounded p-4 flex flex-col items-center ecs-block">
                                     <div class="w-12 h-12 rounded-full bg-rose-500 text-white flex items-center justify-center font-bold mb-2">S</div>
                                     <h4 class="font-bold text-rose-900">Systems</h4>
-                                    <p class="text-xs text-rose-700 mt-2">Logic xử lý mảng Components.</p>
+                                    <p class="text-xs text-rose-700 mt-2"><span lang="vi">Logic xử lý mảng Components.</span><span lang="en">Logic for handling the Components array.</span></p>
                                 </div>
                             </div>
                         </div>
