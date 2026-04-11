@@ -27,16 +27,40 @@ document.addEventListener('DOMContentLoaded', () => {
         backBtn.addEventListener('click', (e) => {
             e.preventDefault();
                 if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-                window.location.href = '../infographic/';
+                let targetHref;
+            if (location.pathname.endsWith("deep-dive.html")) {
+                targetHref = location.pathname.replace("deep-dive.html", "infographic.html");
+            } else if (location.pathname.match(/\/deep-dive\/?$/)) {
+                targetHref = location.pathname.replace(/\/deep-dive\/?$/, "/infographic/");
+            } else {
+                targetHref = "../infographic/";
+            }
+                window.location.href = targetHref;
                 return;
             }
             // animate main area zooming out slightly then navigate
             const main = document.querySelector('main');
                 if (main) {
                 main.classList.add('zoom-out-active');
-                setTimeout(() => { window.location.href = '../infographic/'; }, 340);
+                setTimeout(() => { let targetHref;
+            if (location.pathname.endsWith("deep-dive.html")) {
+                targetHref = location.pathname.replace("deep-dive.html", "infographic.html");
+            } else if (location.pathname.match(/\/deep-dive\/?$/)) {
+                targetHref = location.pathname.replace(/\/deep-dive\/?$/, "/infographic/");
             } else {
-                window.location.href = '../infographic/';
+                targetHref = "../infographic/";
+            }
+                window.location.href = targetHref; }, 340);
+            } else {
+                let targetHref;
+            if (location.pathname.endsWith("deep-dive.html")) {
+                targetHref = location.pathname.replace("deep-dive.html", "infographic.html");
+            } else if (location.pathname.match(/\/deep-dive\/?$/)) {
+                targetHref = location.pathname.replace(/\/deep-dive\/?$/, "/infographic/");
+            } else {
+                targetHref = "../infographic/";
+            }
+                window.location.href = targetHref;
             }
         });
     }
@@ -44,3 +68,25 @@ document.addEventListener('DOMContentLoaded', () => {
     // initialize app UI
     try { initApp(); } catch (e) { console.error('initApp error', e); }
 });
+
+    const backTextLink = document.getElementById('backTextLink');
+    if (backTextLink) {
+        backTextLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            let targetHref;
+            if (location.pathname.endsWith("deep-dive.html")) {
+                targetHref = location.pathname.replace("deep-dive.html", "infographic.html");
+            } else if (location.pathname.match(/\/deep-dive\/?$/)) {
+                targetHref = location.pathname.replace(/\/deep-dive\/?$/, "/infographic/");
+            } else {
+                targetHref = "../infographic/";
+            }
+            const main = document.querySelector('main');
+            if (main && window.matchMedia('(prefers-reduced-motion: no-preference)').matches) {
+                main.classList.add('zoom-out-active');
+                setTimeout(() => { window.location.href = targetHref; }, 340);
+            } else {
+                window.location.href = targetHref;
+            }
+        });
+    }

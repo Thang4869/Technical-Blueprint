@@ -36,6 +36,13 @@
     <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
 
     
+
+    <style>
+        :root:not([lang="en"]) [lang="en"] { display: none !important; }
+        :root[lang="en"] [lang="vi"] { display: none !important; }
+        html:not([lang="en"]) [lang="en"] { display: none !important; }
+        html[lang="en"] [lang="vi"] { display: none !important; }
+    </style>
 </head>
 <body class="antialiased selection:bg-indigo-200 selection:text-indigo-900">
     <div id="bb-error-overlay"></div>
@@ -51,11 +58,11 @@
 
             <div class="flex-1 flex justify-end items-center gap-3 pr-6">
                 <div class="hidden md:flex gap-6 text-sm font-semibold text-slate-500" id="nav-links">
-                    <a href="#overview" class="hover:text-indigo-600 transition-colors">Tổng Quan</a>
-                    <a href="#mechanics" class="hover:text-indigo-600 transition-colors">Cơ Chế</a>
-                    <a href="#architecture" class="hover:text-indigo-600 transition-colors">Kiến Trúc</a>
-                    <a href="#optimization" class="hover:text-indigo-600 transition-colors">Tối Ưu</a>
-                    <a href="#contact" class="hover:text-indigo-600 transition-colors">Liên hệ</a>
+                    <a href="#overview" class="hover:text-indigo-600 transition-colors"><span lang="vi">Tổng Quan</span><span lang="en">Overview</span></a>
+                    <a href="#mechanics" class="hover:text-indigo-600 transition-colors"><span lang="vi">Cơ Chế</span><span lang="en">Mechanics</span></a>
+                    <a href="#architecture" class="hover:text-indigo-600 transition-colors"><span lang="vi">Kiến Trúc</span><span lang="en">Architecture</span></a>
+                    <a href="#optimization" class="hover:text-indigo-600 transition-colors"><span lang="vi">Tối Ưu</span><span lang="en">Optimization</span></a>
+                    <a href="#contact" class="hover:text-indigo-600 transition-colors"><span lang="vi">Liên hệ</span><span lang="en">Contact</span></a>
                 </div>
 
                 <div class="lang-toggle ml-4" role="group" aria-label="Chọn ngôn ngữ">
@@ -87,27 +94,27 @@
     <header class="bg-slate-900 text-white pt-24 pb-20 px-4 relative overflow-hidden">
         <div class="absolute inset-0 opacity-20 header-pattern"></div>
         <div class="max-w-4xl mx-auto text-center relative z-10">
-            <span class="inline-block py-1 px-3 rounded-full bg-indigo-500/20 text-indigo-300 font-semibold text-xs mb-6 border border-indigo-500/30 uppercase tracking-widest">Bản Thuyết Minh Kỹ Thuật (Technical Blueprint)</span>
-            <h1 class="text-4xl md:text-6xl font-extrabold tracking-tight mb-6">Phân Tích Chuyên Sâu<br><span class="gradient-text text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-rose-400">Bizarre Brigade</span></h1>
+            <span class="inline-block py-1 px-3 rounded-full bg-indigo-500/20 text-indigo-300 font-semibold text-xs mb-6 border border-indigo-500/30 uppercase tracking-widest"><span lang="vi">Bản Thuyết Minh Kỹ Thuật (Technical Blueprint)</span><span lang="en">Technical Blueprint</span></span>
+            <h1 class="text-4xl md:text-6xl font-extrabold tracking-tight mb-6"><span lang="vi">Phân Tích Chuyên Sâu</span><span lang="en">Deep Dive</span><br><span class="gradient-text text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-rose-400">Bizarre Brigade</span></h1>
             <p class="text-lg md:text-xl text-slate-300 max-w-2xl mx-auto mb-10 leading-relaxed">
-                Tài liệu phục vụ việc tái tạo kiến trúc hệ thống, gameplay loop và pipeline đồ họa cho dự án minigame Auto-shooter / Roguelite sinh tồn màn hình vỡ.
+                <span lang="vi">Tài liệu phục vụ việc tái tạo kiến trúc hệ thống, gameplay loop và pipeline đồ họa cho dự án minigame Auto-shooter / Roguelite sinh tồn màn hình vỡ.</span><span lang="en">Documentation for recreating the system architecture, gameplay loop, and graphics pipeline for a bullet-heaven Auto-shooter / Roguelite minigame project.</span>
             </p>
             <div class="flex flex-wrap justify-center gap-4">
                 <div class="bg-slate-800/80 backdrop-blur border border-slate-700 rounded-lg px-6 py-4">
                     <div class="text-3xl font-bold text-emerald-400 mb-1">10,000+</div>
-                    <div class="text-xs text-slate-400 uppercase tracking-wide">Entity Mục Tiêu</div>
+                    <div class="text-xs text-slate-400 uppercase tracking-wide"><span lang="vi">Entity Mục Tiêu</span><span lang="en">Target Entity</span></div>
                 </div>
                 <div class="bg-slate-800/80 backdrop-blur border border-slate-700 rounded-lg px-6 py-4">
-                    <div class="text-3xl font-bold text-rose-400 mb-1">60 FPS</div>
-                    <div class="text-xs text-slate-400 uppercase tracking-wide">Mức Khung Hình Chuẩn</div>
+                    <div class="text-3xl font-bold text-rose-400 mb-1">    60 FPS</div>
+                    <div class="text-xs text-slate-400 uppercase tracking-wide"><span lang="vi">Mức Khung Hình Chuẩn</span><span lang="en">Target FPS</span></div>
                 </div>
                 <div class="bg-slate-800/80 backdrop-blur border border-slate-700 rounded-lg px-6 py-4">
                     <div class="text-3xl font-bold text-amber-400 mb-1">ECS</div>
-                    <div class="text-xs text-slate-400 uppercase tracking-wide">Kiến Trúc Lõi</div>
+                    <div class="text-xs text-slate-400 uppercase tracking-wide"><span lang="vi">Kiến Trúc</span><span lang="en">Architecture</span> <span lang="vi">Lõi</span><span lang="en">Core</span></div>
                 </div>
             </div>
             <div class="mt-8">
-                <a id="exploreBtn" href="../deep-dive/" class="ripple-link transition-link cta-glow inline-block bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-3 px-6 rounded-lg shadow-lg">Khám phá chi tiết</a>
+                <a id="exploreBtn" href="../deep-dive/" class="ripple-link transition-link cta-glow inline-block bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-3 px-6 rounded-lg shadow-lg"><span lang="vi">Khám phá chi tiết</span><span lang="en">Explore Details</span></a>
             </div>
         </div>
     </header>
@@ -116,30 +123,30 @@
 
         <section id="overview" class="scroll-mt-24">
             <div class="text-center mb-12">
-                <h2 class="text-3xl font-bold text-slate-900 mb-4">Nhận Diện Hệ Thống Lõi</h2>
-                <p class="text-slate-600 max-w-2xl mx-auto">Phân tích DNA của trò chơi để xác định trọng tâm phát triển. Game tập trung tuyệt đối vào nhịp độ và số lượng vật thể thay vì logic AI phức tạp.</p>
+                <h2 class="text-3xl font-bold text-slate-900 mb-4"><span lang="vi">Nhận Diện Hệ Thống <span lang="vi">Lõi</span><span lang="en">Core</span></span><span lang="en">Identify Core Systems</span></h2>
+                <p class="text-slate-600 max-w-2xl mx-auto"><span lang="vi">Phân tích DNA của trò chơi để xác định trọng tâm phát triển. Game tập trung tuyệt đối vào nhịp độ và số lượng vật thể thay vì logic AI phức tạp.</span><span lang="en">Analyze the game's DNA to identify development focus. The game strictly focuses on pacing and entity count over complex AI logic.</span></p>
             </div>
             
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
                 <div class="bg-white p-8 rounded-2xl shadow-lg border border-slate-100 tech-card">
-                    <h3 class="text-xl font-bold text-slate-800 mb-6 flex items-center gap-3"><span class="text-2xl">🧬</span> Ma Trận Đặc Tính Game</h3>
+                    <h3 class="text-xl font-bold text-slate-800 mb-6 flex items-center gap-3"><span class="text-2xl">🧬</span> <span lang="vi">Ma Trận Đặc Tính Game</span><span lang="en">Game Feature Matrix</span></h3>
                     <div class="chart-container">
                         <canvas id="dnaChart"></canvas>
                     </div>
-                    <p class="text-sm text-center text-slate-500 mt-4 italic">Biểu đồ Radar thể hiện sự lệch pha cố ý về phía "Mật độ Quái vật" và "Tốc độ Nhịp game".</p>
+                    <p class="text-sm text-center text-slate-500 mt-4 italic"><span lang="vi">Biểu đồ Radar thể hiện sự lệch pha cố ý về phía "Mật độ Quái vật" và "Tốc độ Nhịp game".</span><span lang="en">The Radar chart shows an intentional bias towards "Entity Count" and "Pacing".</span></p>
                 </div>
                 
                 <div class="space-y-6">
                     <div class="bg-indigo-50 border-l-4 border-indigo-600 p-6 rounded-r-xl">
-                        <h4 class="font-bold text-indigo-900 text-lg mb-2">Đặc Tả Kỹ Thuật Cấp 1</h4>
+                        <h4 class="font-bold text-indigo-900 text-lg mb-2"><span lang="vi">Đặc Tả Kỹ Thuật Cấp 1</span><span lang="en">Tier-1 Technical Specifications</span></h4>
                         <ul class="space-y-3 text-indigo-800">
-                            <li class="flex items-start"><span class="mr-2 font-bold text-indigo-600">»</span> <strong>Thể loại:</strong> Roguelite Survival / Horde Auto-shooter.</li>
-                            <li class="flex items-start"><span class="mr-2 font-bold text-indigo-600">»</span> <strong>Góc nhìn:</strong> Top-down 2D (Camera khóa theo Player).</li>
-                            <li class="flex items-start"><span class="mr-2 font-bold text-indigo-600">»</span> <strong>Nền tảng:</strong> PC (Bàn phím/Chuột) & Mobile (Virtual Joystick).</li>
+                            <li class="flex items-start"><span class="mr-2 font-bold text-indigo-600">»</span> <strong><span lang="vi">Thể loại:</span><span lang="en">Genre:</span></strong> Roguelite Survival / Horde Auto-shooter.</li>
+                            <li class="flex items-start"><span class="mr-2 font-bold text-indigo-600">»</span> <strong><span lang="vi">Góc nhìn:</span><span lang="en">View:</span></strong> <span lang="vi">Top-down 2D (Camera khóa theo Player).</span><span lang="en">Top-down 2D (Camera locked to Player).</span></li>
+                            <li class="flex items-start"><span class="mr-2 font-bold text-indigo-600">»</span> <strong><span lang="vi">Nền tảng:</span><span lang="en">Platform:</span></strong> <span lang="vi">PC (Bàn phím/Chuột) & Mobile (Virtual Joystick).</span><span lang="en">PC (Keyboard/Mouse) & Mobile (Virtual Joystick).</span></li>
                         </ul>
                     </div>
                     <p class="text-slate-600 leading-relaxed">
-                        Sự đánh đổi lớn nhất trong kiến trúc là hi sinh "Pathfinding (A*)" và "Vật lý phức tạp (Rigidbodies)" để đổi lấy khả năng kết xuất hàng nghìn quái vật (Hordes) cùng lúc. Thuật toán di chuyển chủ yếu dựa trên <em>Steering Behaviors cơ bản</em> (Seek target).
+                        <span lang="vi">Sự đánh đổi lớn nhất trong kiến trúc là hi sinh "Pathfinding (A*)" và "Vật lý phức tạp (Rigidbodies)" để đổi lấy khả năng kết xuất hàng nghìn quái vật (Hordes) cùng lúc. Thuật toán di chuyển chủ yếu dựa trên</span><span lang="en">The biggest architectural trade-off sacrifices "Pathfinding (A*)" and "Complex Physics (Rigidbodies)" to render thousands of monsters (Hordes) simultaneously. The movement algorithm mainly relies on</span> <em><span lang="vi">Steering Behaviors cơ bản</span><span lang="en">basic Steering Behaviors</span></em> (Seek target).
                     </p>
                 </div>
             </div>
@@ -147,56 +154,56 @@
 
         <section id="mechanics" class="scroll-mt-24">
             <div class="text-center mb-12">
-                <h2 class="text-3xl font-bold text-slate-900 mb-4">Vòng Lặp Trải Nghiệm (Core Loop)</h2>
-                <p class="text-slate-600 max-w-2xl mx-auto">Sự thành công của game đến từ một chu trình lặp gây nghiện (Feedback Loop) được thiết kế cực kỳ chặt chẽ, lặp lại hàng trăm lần mỗi phiên chơi.</p>
+                <h2 class="text-3xl font-bold text-slate-900 mb-4"><span lang="vi">Vòng Lặp Trải Nghiệm (Core Loop)</span><span lang="en">Core Experience Loop</span></h2>
+                <p class="text-slate-600 max-w-2xl mx-auto"><span lang="vi">Sự thành công của game đến từ một chu trình lặp gây nghiện (Feedback Loop) được thiết kế cực kỳ chặt chẽ, lặp lại hàng trăm lần mỗi phiên chơi.</span><span lang="en">The game's success stems from an extremely tight, addictive Feedback Loop, repeating hundreds of times per session.</span></p>
             </div>
 
             <div class="bg-white p-8 rounded-2xl shadow-lg border border-slate-100 mb-12 tech-card">
                 <div class="flex flex-col md:flex-row justify-center items-center gap-6">
                     <div class="flex-1 w-full bg-blue-50 border border-blue-200 p-6 rounded-xl text-center">
                         <div class="text-4xl mb-3">🏃</div>
-                        <h4 class="font-bold text-blue-900 mb-2">1. Sinh Tồn & Di Chuyển</h4>
-                        <p class="text-sm text-blue-700">Người chơi điều khiển hướng đi, né tránh bầy quái vật liên tục khép góc.</p>
+                        <h4 class="font-bold text-blue-900 mb-2">1. <span lang="vi">Sinh Tồn & Di Chuyển</span><span lang="en">Survival & Movement</span></h4>
+                        <p class="text-sm text-blue-700"><span lang="vi">Người chơi điều khiển hướng đi, né tránh bầy quái vật liên tục khép góc.</span><span lang="en">Players control movement, dodging waves of monsters continuously closing in.</span></p>
                     </div>
                     
                     <div class="text-3xl text-slate-300 font-bold rotate-90 md:rotate-0">➔</div>
                     
                     <div class="flex-1 w-full bg-rose-50 border border-rose-200 p-6 rounded-xl text-center">
                         <div class="text-4xl mb-3">⚔️</div>
-                        <h4 class="font-bold text-rose-900 mb-2">2. Tấn Công Tự Động</h4>
-                        <p class="text-sm text-rose-700">Vũ khí tự động kích hoạt dựa trên Cooldown Timer và thuật toán nhắm mục tiêu.</p>
+                        <h4 class="font-bold text-rose-900 mb-2">2. <span lang="vi">Tấn Công Tự Động</span><span lang="en">Auto-Attack</span></h4>
+                        <p class="text-sm text-rose-700"><span lang="vi">Vũ khí tự động kích hoạt dựa trên Cooldown Timer và thuật toán nhắm mục tiêu.</span><span lang="en">Weapons auto-trigger based on Cooldown Timers and targeting algorithms.</span></p>
                     </div>
 
                     <div class="text-3xl text-slate-300 font-bold rotate-90 md:rotate-0">➔</div>
 
                     <div class="flex-1 w-full bg-emerald-50 border border-emerald-200 p-6 rounded-xl text-center">
                         <div class="text-4xl mb-3">💎</div>
-                        <h4 class="font-bold text-emerald-900 mb-2">3. Thu Thập Tài Nguyên</h4>
-                        <p class="text-sm text-emerald-700">Quái chết rớt XP Gem. Thu thập để làm đầy thanh kinh nghiệm.</p>
+                        <h4 class="font-bold text-emerald-900 mb-2">3. <span lang="vi">Thu Thập Tài Nguyên</span><span lang="en">Resource Collection</span></h4>
+                        <p class="text-sm text-emerald-700"><span lang="vi">Quái chết rớt XP Gem. Thu thập để làm đầy thanh kinh nghiệm.</span><span lang="en">Dead monsters drop XP Gems. Gather to fill the experience bar.</span></p>
                     </div>
 
                     <div class="text-3xl text-slate-300 font-bold rotate-90 md:rotate-0">➔</div>
 
                     <div class="flex-1 w-full bg-amber-50 border border-amber-200 p-6 rounded-xl text-center">
                         <div class="text-4xl mb-3">⬆️</div>
-                        <h4 class="font-bold text-amber-900 mb-2">4. Tạm Dừng & Lựa Chọn</h4>
-                        <p class="text-sm text-amber-700">Level Up trigger UI Draft (RNG). Chọn Relic/Vũ khí mới và lặp lại vòng lặp.</p>
+                        <h4 class="font-bold text-amber-900 mb-2">4. <span lang="vi">Tạm Dừng & Lựa Chọn</span><span lang="en">Pause & Draft</span></h4>
+                        <p class="text-sm text-amber-700"><span lang="vi">Level Up trigger UI Draft (RNG). Chọn Relic/Vũ khí mới và lặp lại vòng lặp.</span><span lang="en">Leveling up triggers a Draft UI (RNG). Pick a new Relic/Weapon and loop again.</span></p>
                     </div>
                 </div>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                 <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
-                    <h5 class="font-bold text-slate-800 mb-3 border-b pb-2">Hệ Thống Di Chuyển</h5>
-                    <p class="text-sm text-slate-600 mb-2">Sử dụng <strong>Kinematic Body</strong> thay vì Dynamic Body để kiểm soát tuyệt đối vector vận tốc. Va chạm giữa Player-Quái không cản đường (Non-blocking) mà chỉ trừ máu dạng Overlap Box.</p>
+                    <h5 class="font-bold text-slate-800 mb-3 border-b pb-2"><span lang="vi">Hệ Thống Di Chuyển</span><span lang="en">Movement System</span></h5>
+                    <p class="text-sm text-slate-600 mb-2"><span lang="vi">Sử dụng</span><span lang="en">Uses</span> <strong>Kinematic Body</strong> <span lang="vi">thay vì Dynamic Body để kiểm soát tuyệt đối vector vận tốc. Va chạm giữa Player-Quái không cản đường (Non-blocking) mà chỉ trừ máu dạng Overlap Box.</span><span lang="en">instead of Dynamic Body for absolute velocity vector control. Player-Monster collisions are non-blocking; they only deal damage as an Overlap Box.</span></p>
                 </div>
                 <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
-                    <h5 class="font-bold text-slate-800 mb-3 border-b pb-2">Thuật Toán Ngắm Bắn</h5>
-                    <p class="text-sm text-slate-600 mb-2">Mỗi vũ khí có Logic riêng: Kẻ địch gần nhất (Nearest Euclidean), Kẻ địch máu cao nhất, Random hướng, hoặc bắn theo hướng Vector di chuyển của Player.</p>
+                    <h5 class="font-bold text-slate-800 mb-3 border-b pb-2"><span lang="vi">Thuật Toán Ngắm Bắn</span><span lang="en">Targeting Algorithm</span></h5>
+                    <p class="text-sm text-slate-600 mb-2"><span lang="vi">Mỗi vũ khí có Logic riêng: Kẻ địch gần nhất (Nearest Euclidean), Kẻ địch máu cao nhất, Random hướng, hoặc bắn theo hướng Vector di chuyển của Player.</span><span lang="en">Each weapon has its own Logic: Nearest Euclidean, Highest HP, Random direction, or firing along the Player's movement vector.</span></p>
                 </div>
                 <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
-                    <h5 class="font-bold text-slate-800 mb-3 border-b pb-2">Phản Hồi UI/UX (Juiciness)</h5>
-                    <p class="text-sm text-slate-600 mb-2">Yếu tố quyết định cảm giác "đã tay": Số sát thương bay lơ lửng (Floating Text Tweening), Hiệu ứng giật màn hình (Screen Shake) và Khựng hình siêu nhỏ (Hit Stop).</p>
+                    <h5 class="font-bold text-slate-800 mb-3 border-b pb-2"><span lang="vi">Phản Hồi UI/UX (Juiciness)</span><span lang="en">UI/UX Feedback (Juiciness)</span></h5>
+                    <p class="text-sm text-slate-600 mb-2"><span lang="vi">Yếu tố quyết định cảm giác "đã tay": Số sát thương bay lơ lửng (Floating Text Tweening), Hiệu ứng giật màn hình (Screen Shake) và Khựng hình siêu nhỏ (Hit Stop).</span><span lang="en">Factors deciding the "satisfying" feel: Floating damage numbers (Tweening), Screen Shake effects, and micro-hit stops (Hit Stop).</span></p>
                 </div>
             </div>
         </section>
@@ -208,8 +215,8 @@
                 
                 <div class="relative z-10">
                     <div class="text-center mb-10">
-                        <h2 class="text-3xl font-bold mb-4">Kiến Trúc ECS (Entity Component System)</h2>
-                        <p class="text-slate-300 max-w-2xl mx-auto">OOP (Lập trình Hướng đối tượng) với cây kế thừa sâu sẽ triệt tiêu hiệu năng Cache của CPU. ECS biến toàn bộ game thành dữ liệu dạng lưới (Data-Oriented Design) để CPU xử lý hàng loạt.</p>
+                        <h2 class="text-3xl font-bold mb-4"><span lang="vi">Kiến Trúc</span><span lang="en">Architecture</span> ECS (Entity Component System)</h2>
+                        <p class="text-slate-300 max-w-2xl mx-auto"><span lang="vi">OOP (Lập trình Hướng đối tượng) với cây kế thừa sâu sẽ triệt tiêu hiệu năng Cache của CPU. ECS biến toàn bộ game thành dữ liệu dạng lưới (Data-Oriented Design) để CPU xử lý hàng loạt.</span><span lang="en">Deeply inherited OOP kills CPU cache performance. ECS turns the entire game into a data grid (Data-Oriented Design) for batch processing by the CPU.</span></p>
                     </div>
 
                     <div class="bg-slate-800/80 backdrop-blur border border-slate-700 rounded-2xl p-6 mb-10">
@@ -218,7 +225,7 @@
                             <div class="flex-1 bg-indigo-900/50 border border-indigo-500/50 p-6 rounded-xl relative">
                                 <div class="absolute -top-4 left-1/2 -translate-x-1/2 bg-indigo-500 text-white w-8 h-8 rounded-full flex items-center justify-center font-bold">E</div>
                                 <h3 class="text-xl font-bold text-indigo-300 mt-2 mb-3">Entities</h3>
-                                <p class="text-sm text-indigo-100 mb-4">Chỉ là định danh (Integer IDs). Không chứa bất kỳ Logic hay Dữ liệu nào.</p>
+                                <p class="text-sm text-indigo-100 mb-4"><span lang="vi">Chỉ là định danh (Integer IDs). Không chứa bất kỳ Logic hay Dữ liệu nào.</span><span lang="en">Merely identifiers (Integer IDs). Contains no Logic or Data whatsoever.</span></p>
                                 <div class="font-mono text-xs bg-indigo-950/80 p-3 rounded text-indigo-200 text-left">
                                     Entity 1042 (Player)<br>
                                     Entity 5912 (Enemy)<br>
@@ -229,7 +236,7 @@
                             <div class="flex-1 bg-emerald-900/50 border border-emerald-500/50 p-6 rounded-xl relative">
                                 <div class="absolute -top-4 left-1/2 -translate-x-1/2 bg-emerald-500 text-white w-8 h-8 rounded-full flex items-center justify-center font-bold">C</div>
                                 <h3 class="text-xl font-bold text-emerald-300 mt-2 mb-3">Components</h3>
-                                <p class="text-sm text-emerald-100 mb-4">Chứa dữ liệu thuần túy (Structs/Arrays). Hoàn toàn không chứa phương thức (Methods).</p>
+                                <p class="text-sm text-emerald-100 mb-4"><span lang="vi">Chứa dữ liệu thuần túy (Structs/Arrays). Hoàn toàn không chứa phương thức (Methods).</span><span lang="en">Contains pure data (Structs/Arrays). Contains absolutely no Methods.</span></p>
                                 <div class="font-mono text-xs bg-emerald-950/80 p-3 rounded text-emerald-200 text-left">
                                     Transform {x, y}<br>
                                     Velocity {dx, dy}<br>
@@ -240,7 +247,7 @@
                             <div class="flex-1 bg-rose-900/50 border border-rose-500/50 p-6 rounded-xl relative">
                                 <div class="absolute -top-4 left-1/2 -translate-x-1/2 bg-rose-500 text-white w-8 h-8 rounded-full flex items-center justify-center font-bold">S</div>
                                 <h3 class="text-xl font-bold text-rose-300 mt-2 mb-3">Systems</h3>
-                                <p class="text-sm text-rose-100 mb-4">Các hàm Logic chạy mỗi Frame, duyệt qua các mảng Components để tính toán.</p>
+                                <p class="text-sm text-rose-100 mb-4"><span lang="vi">Các hàm Logic chạy mỗi Frame, duyệt qua các mảng</span><span lang="en">Logic functions run every frame, iterating over arrays</span> Components <span lang="vi">để tính toán.</span><span lang="en">to calculate.</span></p>
                                 <div class="font-mono text-xs bg-rose-950/80 p-3 rounded text-rose-200 text-left">
                                     MovementSystem(Transform, Velocity)<br>
                                     DamageSystem(Health, Collider)
@@ -252,26 +259,26 @@
 
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                         <div>
-                            <h4 class="text-lg font-bold text-slate-200 mb-4 border-b border-slate-700 pb-2">Tiến trình Game Loop</h4>
+                            <h4 class="text-lg font-bold text-slate-200 mb-4 border-b border-slate-700 pb-2"><span lang="vi">Tiến trình Game Loop</span><span lang="en">Game Loop Flow</span></h4>
                             <div class="bg-slate-950 rounded-lg p-4 font-mono text-sm text-emerald-400 overflow-x-auto">
                                 while is_game_running:
                                 dt = get_delta_time()
                                 
-                                <span class="text-slate-500"># 1. Thu thập Input</span>
+                                <span class="text-slate-500"><span lang="vi"># 1. Thu thập Input</span><span lang="en"># 1. Collecting Input</span></span>
                                 InputSystem.Process()
                                 
                                 if state == PLAYING:
-                                    <span class="text-slate-500"># 2. Cập nhật Logic (Logic Update)</span>
+                                    <span class="text-slate-500"><span lang="vi"># 2. Cập nhật Logic (Logic Update)</span><span lang="en"># 2. Logic Update</span></span>
                                     SpawnerSystem.Update(dt)
                                     AISystem.Update(dt)
                                     MovementSystem.Update(dt)
                                     
-                                    <span class="text-slate-500"># Tái tạo lưới không gian cho Va chạm</span>
+                                    <span class="text-slate-500"><span lang="vi"># Tái tạo lưới không gian cho Va chạm</span><span lang="en"># Rebuild Spatial Grid for Collision</span></span>
                                     SpatialHashGrid.Rebuild() 
                                     CollisionSystem.Check()
                                     CombatSystem.ApplyDamage()
                                     
-                                <span class="text-slate-500"># 3. Kết xuất Đồ họa (Render Pipeline)</span>
+                                <span class="text-slate-500"><span lang="vi"># 3. Kết xuất Đồ họa (Render Pipeline)</span><span lang="en"># 3. Render Pipeline</span></span>
                                 Renderer.ClearScreen()
                                 RenderSystem.DrawBatched()
                                 UISystem.Draw()
@@ -279,7 +286,7 @@
                             </div>
                         </div>
                         <div class="space-y-4">
-                            <h4 class="text-lg font-bold text-slate-200 mb-4 border-b border-slate-700 pb-2">Phân Tích Thành Phần Vật Thể</h4>
+                            <h4 class="text-lg font-bold text-slate-200 mb-4 border-b border-slate-700 pb-2"><span lang="vi">Phân Tích Thành Phần Vật Thể</span><span lang="en">Entity Component Analysis</span></h4>
                             <div class="bg-slate-800 rounded p-4 flex gap-3 items-center">
                                 <div class="w-10 h-10 rounded bg-indigo-500 flex-shrink-0 flex items-center justify-center text-xl">🧍</div>
                                 <div>
@@ -310,80 +317,80 @@
 
         <section id="optimization" class="scroll-mt-24">
             <div class="text-center mb-12">
-                <h2 class="text-3xl font-bold text-slate-900 mb-4">Chiến Lược Tối Ưu Hiệu Năng & Rendering</h2>
-                <p class="text-slate-600 max-w-2xl mx-auto">Phân tích ngân sách tài nguyên (Budget) và các kỹ thuật cốt lõi giúp thiết bị di động có thể render hàng ngàn vật thể mà không rớt khung hình.</p>
+                <h2 class="text-3xl font-bold text-slate-900 mb-4"><span lang="vi">Chiến Lược</span><span lang="en">Strategy</span> <span lang="vi">Tối Ưu</span><span lang="en">Optimization</span> <span lang="vi">Hiệu Năng & Rendering</span><span lang="en">Performance & Rendering</span></h2>
+                <p class="text-slate-600 max-w-2xl mx-auto"><span lang="vi">Phân tích ngân sách tài nguyên (Budget) và các kỹ thuật cốt lõi giúp thiết bị di động có thể render hàng ngàn vật thể mà không rớt khung hình.</span><span lang="en">Analyzing resource budgets and core techniques that allow mobile devices to render thousands of entities without frame drops.</span></p>
             </div>
 
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-12">
                 
                 <div class="bg-white p-8 rounded-2xl shadow-lg border border-slate-100 tech-card flex flex-col">
-                    <h3 class="text-xl font-bold text-slate-800 mb-6 flex items-center gap-3"><span class="text-2xl">📊</span> Ngân Sách Xử Lý (Per Frame)</h3>
+                    <h3 class="text-xl font-bold text-slate-800 mb-6 flex items-center gap-3"><span class="text-2xl">📊</span> <span lang="vi">Ngân Sách Xử Lý (Per Frame)</span><span lang="en">Processing Budget (Per Frame)</span></h3>
                     <div class="chart-container flex-grow">
                         <canvas id="budgetChart"></canvas>
                     </div>
-                    <p class="text-sm text-slate-500 mt-4 text-center">Hệ thống Va chạm và Cập nhật AI chiếm phần lớn CPU. Đòi hỏi cấu trúc dữ liệu phẳng.</p>
+                    <p class="text-sm text-slate-500 mt-4 text-center"><span lang="vi">Hệ thống Va chạm và Cập nhật AI chiếm phần lớn CPU. Đòi hỏi cấu trúc dữ liệu phẳng.</span><span lang="en">Collision and AI Update systems consume most of the CPU. Requires flat data structures.</span></p>
                 </div>
 
                 <div class="space-y-6">
                     <div class="bg-white p-6 rounded-xl shadow-sm border-l-4 border-amber-500">
                         <h4 class="font-bold text-slate-800 text-lg mb-2">1. Batch Rendering & Texture Atlas</h4>
-                        <p class="text-sm text-slate-600 mb-3">GPU sẽ quá tải nếu gọi lệnh vẽ (Draw Call) cho từng quái vật riêng lẻ. Giải pháp:</p>
+                        <p class="text-sm text-slate-600 mb-3"><span lang="vi">GPU sẽ quá tải nếu gọi lệnh vẽ (Draw Call) cho từng quái vật riêng lẻ. Giải pháp:</span><span lang="en">The GPU overloads if sending distinct draw calls for each individual monster. Solution:</span></p>
                         <ul class="text-sm text-slate-700 list-disc pl-5 space-y-1 font-mono">
-                            <li>Gom toàn bộ Asset vào 1 file hình lớn (Texture Atlas).</li>
-                            <li>Sử dụng Instanced Rendering: Vẽ 1 mesh hình vuông duy nhất, lặp lại N lần với mảng [X, Y, UV_Coords] truyền thẳng lên GPU.</li>
+                            <li><span lang="vi">Gom toàn bộ Asset vào 1 file hình lớn (Texture Atlas).</span><span lang="en">Pack all assets into a single large image file (Texture Atlas).</span></li>
+                            <li><span lang="vi">Sử dụng</span><span lang="en">Uses</span> Instanced Rendering: Vẽ 1 mesh hình vuông duy nhất, lặp lại N lần với mảng [X, Y, UV_Coords] truyền thẳng lên GPU.</li>
                         </ul>
                     </div>
 
                     <div class="bg-white p-6 rounded-xl shadow-sm border-l-4 border-emerald-500">
-                        <h4 class="font-bold text-slate-800 text-lg mb-2">2. Spatial Partitioning (Chia lưới không gian)</h4>
-                        <p class="text-sm text-slate-600 mb-3">Thuật toán dò va chạm Brute-force (O(N^2)) sẽ làm sập game. Áp dụng <strong>Spatial Hashing</strong>:</p>
+                        <h4 class="font-bold text-slate-800 text-lg mb-2">2. <span lang="vi">Spatial Partitioning (Chia lưới không gian)</span><span lang="en">Spatial Partitioning (Grid)</span></h4>
+                        <p class="text-sm text-slate-600 mb-3"><span lang="vi">Thuật toán dò va chạm Brute-force (O(N^2)) sẽ làm sập game. Áp dụng</span><span lang="en">O(N^2) brute-force collision detection crashes the game. Applying</span> <strong>Spatial Hashing</strong>:</p>
                         <ul class="text-sm text-slate-700 list-disc pl-5 space-y-1 font-mono">
-                            <li>Chia bản đồ thành các ô Grid. Map Entity ID vào cell tương ứng.</li>
-                            <li>Chỉ xét va chạm giữa các Entity nằm chung 1 cell hoặc 8 ô lân cận. Đưa độ phức tạp về mức tuyến tính ~O(N).</li>
+                            <li><span lang="vi">Chia bản đồ thành các ô Grid. Map Entity ID vào cell tương ứng.</span><span lang="en">Divide the map into Grid cells. Map Entity IDs to their respective cells.</span></li>
+                            <li><span lang="vi">Chỉ xét va chạm giữa các Entity nằm chung 1 cell hoặc 8 ô lân cận. Đưa độ phức tạp về mức tuyến tính ~O(N).</span><span lang="en">Only check collisions between entities sharing the same cell or its 8 neighbors. Reduces complexity to linear ~O(N).</span></li>
                         </ul>
                     </div>
                     
                     <div class="bg-white p-6 rounded-xl shadow-sm border-l-4 border-blue-500">
-                        <h4 class="font-bold text-slate-800 text-lg mb-2">3. Object Pooling (Bể chứa Bộ nhớ)</h4>
-                        <p class="text-sm text-slate-600">Tránh khởi tạo (<code>new</code>) và hủy (<code>destroy</code>) rác bộ nhớ trong lúc chơi. Tạo sẵn mảng tĩnh 3000 con quái vật lúc Loading. Khi quái chết, ẩn đi (SetActive = false) thay vì xóa khỏi RAM, và tái sử dụng khi Spawn quái mới.</p>
+                        <h4 class="font-bold text-slate-800 text-lg mb-2">3. <span lang="vi">Object Pooling (Bể chứa Bộ nhớ)</span><span lang="en">Object Pooling (Memory Pool)</span></h4>
+                        <p class="text-sm text-slate-600"><span lang="vi">Tránh khởi tạo (</span><span lang="en">Avoid instantiating (</span><code>new</code><span lang="vi">) và hủy (</span><span lang="en">) and destroying (</span><code>destroy</code><span lang="vi">) rác bộ nhớ trong lúc chơi. Tạo sẵn mảng tĩnh 3000 con quái vật lúc Loading. Khi quái chết, ẩn đi (SetActive = false) thay vì xóa khỏi RAM, và tái sử dụng khi Spawn quái mới.</span><span lang="en">) causing memory garbage during gameplay. Pre-allocate a static array of 3000 monsters upon loading. When a monster dies, hide it (SetActive = false) instead of removing it from RAM, and reuse it when spawning new monsters.</span></p>
                     </div>
                 </div>
             </div>
 
             <div class="bg-white p-8 rounded-2xl shadow-lg border border-slate-100 tech-card">
-                <h3 class="text-xl font-bold text-slate-800 mb-6 flex items-center justify-center gap-3">Tác Động Của Tối Ưu (Thời gian Render Frame - ms)</h3>
+                <h3 class="text-xl font-bold text-slate-800 mb-6 flex items-center justify-center gap-3"><span lang="vi">Tác Động Của</span><span lang="en">Impact of</span> <span lang="vi">Tối Ưu</span><span lang="en">Optimization</span> <span lang="vi">(Thời gian Render Frame - ms)</span><span lang="en">(Render Frame Time - ms)</span></h3>
                 <div class="chart-container">
                     <canvas id="optimizationChart"></canvas>
                 </div>
-                <p class="text-sm text-slate-500 mt-4 text-center">Mục tiêu là giữ tổng thời gian xử lý một Frame dưới 16.6ms để duy trì ổn định mức 60 FPS.</p>
+                <p class="text-sm text-slate-500 mt-4 text-center"><span lang="vi">Mục tiêu là giữ tổng thời gian xử lý một Frame dưới 16.6ms để duy trì ổn định mức 60 FPS.</span><span lang="en">The goal is to keep total frame processing time under 16.6ms to maintain a stable 60 FPS.</span></p>
             </div>
         </section>
 
         <section id="recreation" class="pb-16 scroll-mt-24">
             <div class="bg-indigo-600 text-white rounded-3xl p-8 md:p-12 shadow-xl text-center">
-                <h2 class="text-3xl font-bold mb-6">Chiến Lược Tái Tạo V1.0 (MVP Scope)</h2>
-                <p class="text-indigo-200 mb-10 max-w-2xl mx-auto">Trước khi xây dựng nội dung khổng lồ, cần hoàn thiện một bộ khung MVP (Minimum Viable Product) cực kỳ vững chắc với đầy đủ tính năng kỹ thuật lõi.</p>
+                <h2 class="text-3xl font-bold mb-6"><span lang="vi">Chiến Lược Tái Tạo V1.0 (MVP Scope)</span><span lang="en">Recreation Strategy V1.0 (MVP Scope)</span></h2>
+                <p class="text-indigo-200 mb-10 max-w-2xl mx-auto"><span lang="vi">Trước khi xây dựng nội dung khổng lồ, cần hoàn thiện một bộ khung MVP (Minimum Viable Product) cực kỳ vững chắc với đầy đủ tính năng kỹ thuật lõi.</span><span lang="en">Before building massive content, complete a rock-solid MVP framework with all core technical features.</span></p>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8 text-left">
                     <div class="bg-white/10 rounded-xl p-6 border border-white/20">
-                        <h3 class="text-xl font-bold mb-4 flex items-center gap-2 text-white">✅ Phải Hoàn Thiện (Must-have)</h3>
+                        <h3 class="text-xl font-bold mb-4 flex items-center gap-2 text-white">✅ <span lang="vi">Phải Hoàn Thiện (Must-have)</span><span lang="en">Must Have</span></h3>
                         <ul class="space-y-3 text-indigo-100 text-sm">
                             <li class="flex items-center gap-2"><div class="w-5 h-5 rounded-full bg-emerald-400 text-indigo-900 flex items-center justify-center text-xs font-bold">✓</div> ECS Core Framework (Arrays/Structs)</li>
-                            <li class="flex items-center gap-2"><div class="w-5 h-5 rounded-full bg-emerald-400 text-indigo-900 flex items-center justify-center text-xs font-bold">✓</div> Thuật toán Spatial Hashing Grid</li>
-                            <li class="flex items-center gap-2"><div class="w-5 h-5 rounded-full bg-emerald-400 text-indigo-900 flex items-center justify-center text-xs font-bold">✓</div> Render Engine: Hỗ trợ Texture Batching</li>
-                            <li class="flex items-center gap-2"><div class="w-5 h-5 rounded-full bg-emerald-400 text-indigo-900 flex items-center justify-center text-xs font-bold">✓</div> Player Movement (WASD) mượt mà</li>
+                            <li class="flex items-center gap-2"><div class="w-5 h-5 rounded-full bg-emerald-400 text-indigo-900 flex items-center justify-center text-xs font-bold">✓</div> <span lang="vi">Thuật toán Spatial Hashing Grid</span><span lang="en">Spatial Hashing Grid Algorithm</span></li>
+                            <li class="flex items-center gap-2"><div class="w-5 h-5 rounded-full bg-emerald-400 text-indigo-900 flex items-center justify-center text-xs font-bold">✓</div> <span lang="vi">Render Engine: Hỗ trợ Texture Batching</span><span lang="en">Render Engine: Texture Batching Support</span></li>
+                            <li class="flex items-center gap-2"><div class="w-5 h-5 rounded-full bg-emerald-400 text-indigo-900 flex items-center justify-center text-xs font-bold">✓</div> <span lang="vi">Player Movement (WASD) mượt mà</span><span lang="en">Smooth Player Movement (WASD)</span></li>
                             <li class="flex items-center gap-2"><div class="w-5 h-5 rounded-full bg-emerald-400 text-indigo-900 flex items-center justify-center text-xs font-bold">✓</div> 1 Base Enemy (AI Seekers) + Spawn Logic</li>
-                            <li class="flex items-center gap-2"><div class="w-5 h-5 rounded-full bg-emerald-400 text-indigo-900 flex items-center justify-center text-xs font-bold">✓</div> Logic Auto-attack cơ bản (Tìm mục tiêu gần nhất)</li>
+                            <li class="flex items-center gap-2"><div class="w-5 h-5 rounded-full bg-emerald-400 text-indigo-900 flex items-center justify-center text-xs font-bold">✓</div> <span lang="vi">Logic Auto-attack cơ bản (Tìm mục tiêu gần nhất)</span><span lang="en">Basic Auto-attack Logic (Find nearest target)</span></li>
                         </ul>
                     </div>
                     
                     <div class="bg-black/20 rounded-xl p-6 border border-white/10">
-                        <h3 class="text-xl font-bold mb-4 flex items-center gap-2 text-white">⏳ Trì Hoãn (Post-MVP)</h3>
+                        <h3 class="text-xl font-bold mb-4 flex items-center gap-2 text-white">⏳ <span lang="vi">Trì Hoãn (Post-MVP)</span><span lang="en">Delay (Post-MVP)</span></h3>
                         <ul class="space-y-3 text-indigo-200/70 text-sm">
-                            <li class="flex items-center gap-2"><div class="w-5 h-5 rounded-full bg-rose-500/50 text-white flex items-center justify-center text-xs font-bold">✗</div> Animation Sprites phức tạp (Dùng hình học thay thế trước)</li>
-                            <li class="flex items-center gap-2"><div class="w-5 h-5 rounded-full bg-rose-500/50 text-white flex items-center justify-center text-xs font-bold">✗</div> Hệ thống nâng cấp Relic/Vũ khí đa dạng (Drafting UI)</li>
+                            <li class="flex items-center gap-2"><div class="w-5 h-5 rounded-full bg-rose-500/50 text-white flex items-center justify-center text-xs font-bold">✗</div> <span lang="vi">Animation Sprites phức tạp (Dùng hình học thay thế trước)</span><span lang="en">Complex Sprite Animations (Use placeholder geometry initially)</span></li>
+                            <li class="flex items-center gap-2"><div class="w-5 h-5 rounded-full bg-rose-500/50 text-white flex items-center justify-center text-xs font-bold">✗</div> <span lang="vi">Hệ thống nâng cấp Relic/Vũ khí đa dạng (Drafting UI)</span><span lang="en">Diverse Relic/Weapon Upgrade System (Drafting UI)</span></li>
                             <li class="flex items-center gap-2"><div class="w-5 h-5 rounded-full bg-rose-500/50 text-white flex items-center justify-center text-xs font-bold">✗</div> Save/Load State & Progression Meta-game</li>
-                            <li class="flex items-center gap-2"><div class="w-5 h-5 rounded-full bg-rose-500/50 text-white flex items-center justify-center text-xs font-bold">✗</div> Hệ thống Âm thanh đa kênh (Audio mixing)</li>
+                            <li class="flex items-center gap-2"><div class="w-5 h-5 rounded-full bg-rose-500/50 text-white flex items-center justify-center text-xs font-bold">✗</div> <span lang="vi">Hệ thống Âm thanh đa kênh (Audio mixing)</span><span lang="en">Multi-channel Audio System (Audio mixing)</span></li>
                         </ul>
                     </div>
 
@@ -395,8 +402,8 @@
 
         <section id="contact" class="max-w-6xl mx-auto px-4 py-16 sm:px-6 lg:px-8">
             <div class="bg-white p-8 rounded-2xl shadow-lg border border-slate-100 text-center">
-                <h2 class="text-2xl font-bold text-slate-900 mb-4">Contact / Liên hệ</h2>
-                <p class="text-slate-600 mb-4">Bạn có thể liên hệ để trao đổi về dự án, hợp tác hoặc yêu cầu code sample.</p>
+                <h2 class="text-2xl font-bold text-slate-900 mb-4">Contact / <span lang="vi">Liên hệ</span><span lang="en">Contact</span></h2>
+                <p class="text-slate-600 mb-4"><span lang="vi">Bạn có thể liên hệ để trao đổi về dự án, hợp tác hoặc yêu cầu code sample.</span><span lang="en">Feel free to reach out to discuss the project, collaborate, or request code samples.</span></p>
                 <div class="flex flex-col md:flex-row items-center justify-center gap-6">
                     <a class="text-indigo-600 font-semibold" href="mailto:vanthang48692109@gmail.com">vanthang48692109@gmail.com</a>
                     <a class="text-slate-700 hover:text-indigo-600" href="https://github.com/Thang4869" target="_blank" rel="noopener">GitHub: /Thang4869</a>
@@ -406,7 +413,7 @@
         </section>
 
     <footer class="bg-slate-900 text-slate-500 text-center py-8 border-t border-slate-800">
-        <p class="text-sm">Báo cáo Phân tích Kiến trúc Hệ Thống Bizarre Brigade.</p>
+        <p class="text-sm"><span lang="vi">Báo cáo Phân tích Kiến trúc Hệ Thống Bizarre Brigade.</span><span lang="en">Bizarre Brigade System Architecture Analysis Report.</span></p>
     </footer>
 
     <!-- Fixed scroll-progress navigation button -->
@@ -430,9 +437,15 @@
                     e.preventDefault();
                     e.stopImmediatePropagation();
                 } catch (err) {}
-                // Compute base path (handles /infographic/ and /<repo>/infographic/)
-                const p = location.pathname.replace(/\/infographic\/?$/,'/');
-                location.href = p + 'deep-dive/';
+                let newHref;
+                if (location.pathname.endsWith("infographic.html")) {
+                    newHref = location.pathname.replace("infographic.html", "deep-dive.html");
+                } else if (location.pathname.match(/\/infographic\/?$/)) {
+                    newHref = location.pathname.replace(/\/infographic\/?$/, "/deep-dive/");
+                } else {
+                    newHref = "../deep-dive/";
+                }
+                location.href = newHref;
             }, {capture: true});
         })();
     </script>

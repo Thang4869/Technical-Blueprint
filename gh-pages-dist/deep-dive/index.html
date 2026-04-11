@@ -17,13 +17,20 @@
     <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
 
     <link rel="stylesheet" href="../css/styles.css">
+
+    <style>
+        :root:not([lang="en"]) [lang="en"] { display: none !important; }
+        :root[lang="en"] [lang="vi"] { display: none !important; }
+        html:not([lang="en"]) [lang="en"] { display: none !important; }
+        html[lang="en"] [lang="vi"] { display: none !important; }
+    </style>
 </head>
 <body class="bg-slate-50 text-slate-800 h-screen flex overflow-hidden">
 
     <!-- Sidebar Navigation -->
     <aside class="w-64 bg-white border-r border-slate-200 flex flex-col h-full flex-shrink-0 z-20 absolute md:relative transform -translate-x-full md:translate-x-0 transition-transform duration-300" id="sidebar">
         <div class="p-6 border-b border-slate-200 flex justify-between items-center">
-            <a href="../infographic/" class="transition-link block">
+            <a id="backTextLink" href="#" class="transition-link block">
                 <h1 class="text-xl font-bold text-slate-900 tracking-tight">Bizarre Brigade</h1>
                 <p class="text-xs text-slate-500 font-mono mt-1">v1.0.0 Architecture</p>
             </a>
@@ -82,5 +89,15 @@
     <script src="../js/deep-dive/deep-dive.scrollnav.init.js" defer></script>
     <script src="../js/deep-dive/deep-dive.annotate.js" defer></script>
     <script src="../js/deep-dive/deep-dive.errorOverlay.js" defer></script>
+
+    <script>
+        (function(){
+            const stored = localStorage.getItem('bb-lang');
+            if(stored) document.documentElement.lang = stored;
+            window.addEventListener('storage', (e) => {
+                if(e.key === 'bb-lang') document.documentElement.lang = e.newValue;
+            });
+        })();
+    </script>
 </body>
 </html>

@@ -11,6 +11,7 @@ export function initLangToggle() {
             btnEn.classList.toggle('active', code === 'en');
             btnVi.setAttribute('aria-pressed', code === 'vi');
             btnEn.setAttribute('aria-pressed', code === 'en');
+            window.dispatchEvent(new CustomEvent('langChanged', { detail: code }));
         }
 
         const stored = localStorage.getItem('bb-lang');

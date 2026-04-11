@@ -1,4 +1,34 @@
-import { wrapLabel } from './charts.helpers.js';
+﻿const fs = require('fs');
+
+const langToggleCode = export function initLangToggle() {
+    try {
+        const btnVi = document.getElementById('langVi');
+        const btnEn = document.getElementById('langEn');
+        if (!btnVi || !btnEn) return;
+
+        function setLang(code){
+            document.documentElement.lang = code;
+            localStorage.setItem('bb-lang', code);
+            btnVi.classList.toggle('active', code === 'vi');
+            btnEn.classList.toggle('active', code === 'en');
+            btnVi.setAttribute('aria-pressed', code === 'vi');
+            btnEn.setAttribute('aria-pressed', code === 'en');
+            window.dispatchEvent(new CustomEvent('langChanged', { detail: code }));
+        }
+
+        const stored = localStorage.getItem('bb-lang');
+        const initial = stored || document.documentElement.lang || 'vi';
+        setLang(initial);
+
+        btnVi.addEventListener('click', () => setLang('vi'));
+        btnEn.addEventListener('click', () => setLang('en'));
+    } catch (e) { /* silent */ }
+};
+
+fs.writeFileSync('src/js/dom/langToggle.js', langToggleCode, 'utf8');
+try { fs.writeFileSync('gh-pages-dist/js/dom/langToggle.js', langToggleCode, 'utf8'); } catch(e){}
+
+const chartsCode = import { wrapLabel } from './charts.helpers.js';
 import { tooltipConfig } from './charts.tooltip.js';
 
 let chartInstances = {
@@ -112,4 +142,8 @@ export function initCharts() {
     }
 }
 
-export default initCharts;
+export default initCharts;;
+
+fs.writeFileSync('src/js/charts.init.js', chartsCode, 'utf8');
+try { fs.writeFileSync('gh-pages-dist/js/charts.init.js', chartsCode, 'utf8'); } catch(e){}
+console.log('Done Updating JS');
