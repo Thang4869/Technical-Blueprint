@@ -1,0 +1,440 @@
+﻿<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bizarre Brigade | Technical Infographic</title>
+    <meta name="description" content="PhĂ¢n tĂ­ch ká»¹ thuáº­t vĂ  blueprint Ä‘á»ƒ tĂ¡i táº¡o Bizarre Brigade â€” má»™t roguelite auto-shooter táº­p trung vĂ o hiá»‡u nÄƒng vĂ  ECS architecture.">
+    <meta name=" theme-color" content="#0f172a">
+    <link rel="icon" href="/favicon.ico">
+    <meta name="msapplication-TileColor" content="#0f172a">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <!-- Open Graph / Social -->
+    <meta property="og:title" content="Bizarre Brigade â€” Technical Blueprint">
+    <meta property="og:description" content="Blueprint ká»¹ thuáº­t: ECS, Spatial Hashing, Object Pooling, vĂ  ká»¹ thuáº­t tá»‘i Æ°u cho roguelite auto-shooter.">
+    <meta property="og:url" content="https://thang4869.github.io/Technical-Blueprint/infographic.html">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:creator" content="@wint4869">
+    <link rel="icon" href="/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicon.ico">
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&family=Fira+Code:wght@500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/styles.css">
+    
+    <!-- Chosen Palette: Energetic & Playful (Indigo, Emerald, Rose, Amber) -->
+    <!-- Application Structure Plan: The SPA is structured as a vertical scrolling infographic to guide the user through a logical narrative: Game Overview -> Core Mechanics -> Technical Architecture -> Performance Optimization -> Recreation MVP. This linear flow ensures technical concepts (like ECS and Spatial Hashing) are introduced after the basic game context is established. A sticky header provides context, while Material Design cards segment information cleanly. -->
+    <!-- Visualization & Content Choices: 
+         1. Game DNA: Goal: Inform/Compare. Method: Radar Chart (Chart.js). Justification: Perfect for showing balance across multiple game design attributes. NO SVG used.
+         2. Core Loop: Goal: Organize. Method: HTML/CSS Flexbox process flow. Justification: Clearly shows the sequential steps of gameplay without external diagramming tools. NO Mermaid/SVG used.
+         3. ECS Architecture: Goal: Organize. Method: Styled HTML Grid. Justification: Visually separates Entities, Components, and Systems to explain data-oriented design. NO SVG used.
+         4. Performance Budget: Goal: Compare (Composition). Method: Doughnut Chart (Chart.js). Justification: Illustrates the percentage of frame time allocated to different systems. NO SVG used.
+         5. Optimization Impact: Goal: Change/Compare. Method: Bar Chart (Chart.js). Justification: Demonstrates the drastic reduction in frame time after applying optimization techniques. NO SVG used. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+
+    
+</head>
+<body class="antialiased selection:bg-indigo-200 selection:text-indigo-900">
+    <div id="bb-error-overlay"></div>
+
+    <nav class="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-slate-200 shadow-sm">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center">
+            <div class="flex items-center gap-2">
+                <div class="w-8 h-8 rounded bg-indigo-600 text-white flex items-center justify-center font-bold text-lg shadow-lg">B</div>
+                <span class="font-bold text-xl tracking-tight text-slate-800">Bizarre Brigade<span class="text-indigo-600">.</span></span>
+            </div>
+
+            <!-- center nav removed â€” will place nav next to language toggle on the right -->
+
+            <div class="flex-1 flex justify-end items-center gap-3 pr-6">
+                <div class="hidden md:flex gap-6 text-sm font-semibold text-slate-500" id="nav-links">
+                    <a href="#overview" class="hover:text-indigo-600 transition-colors">Tá»•ng Quan</a>
+                    <a href="#mechanics" class="hover:text-indigo-600 transition-colors">CÆ¡ Cháº¿</a>
+                    <a href="#architecture" class="hover:text-indigo-600 transition-colors">Kiáº¿n TrĂºc</a>
+                    <a href="#optimization" class="hover:text-indigo-600 transition-colors">Tá»‘i Æ¯u</a>
+                    <a href="#contact" class="hover:text-indigo-600 transition-colors">LiĂªn há»‡</a>
+                </div>
+
+                <div class="lang-toggle ml-4" role="group" aria-label="Chá»n ngĂ´n ngá»¯">
+                    <button id="langVi" class="lang-btn" aria-pressed="false" aria-label="Tiáº¿ng Viá»‡t">
+                        <svg class="flag" viewBox="0 0 60 40" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+                            <rect width="60" height="40" fill="#da251d"/>
+                            <polygon points="30,9 34,23 48,23 36,31 40,45 30,36 20,45 24,31 12,23 26,23" fill="#ffde00" transform="translate(0,-6) scale(0.9)"/>
+                        </svg>
+                        <span class="visually-hidden">VI</span>
+                    </button>
+                    <button id="langEn" class="lang-btn" aria-pressed="false" aria-label="English">
+                        <svg class="flag" viewBox="0 0 60 40" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+                            <rect width="60" height="40" fill="#b22234"/>
+                            <g fill="#fff">
+                                <rect y="4" width="60" height="4"/>
+                                <rect y="12" width="60" height="4"/>
+                                <rect y="20" width="60" height="4"/>
+                                <rect y="28" width="60" height="4"/>
+                                <rect x="0" y="0" width="26" height="16" fill="#3c3b6e"/>
+                            </g>
+                        </svg>
+                        <span class="visually-hidden">EN</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <header class="bg-slate-900 text-white pt-24 pb-20 px-4 relative overflow-hidden">
+        <div class="absolute inset-0 opacity-20 header-pattern"></div>
+        <div class="max-w-4xl mx-auto text-center relative z-10">
+            <span class="inline-block py-1 px-3 rounded-full bg-indigo-500/20 text-indigo-300 font-semibold text-xs mb-6 border border-indigo-500/30 uppercase tracking-widest">Báº£n Thuyáº¿t Minh Ká»¹ Thuáº­t (Technical Blueprint)</span>
+            <h1 class="text-4xl md:text-6xl font-extrabold tracking-tight mb-6">PhĂ¢n TĂ­ch ChuyĂªn SĂ¢u<br><span class="gradient-text text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-rose-400">Bizarre Brigade</span></h1>
+            <p class="text-lg md:text-xl text-slate-300 max-w-2xl mx-auto mb-10 leading-relaxed">
+                TĂ i liá»‡u phá»¥c vá»¥ viá»‡c tĂ¡i táº¡o kiáº¿n trĂºc há»‡ thá»‘ng, gameplay loop vĂ  pipeline Ä‘á»“ há»a cho dá»± Ă¡n minigame Auto-shooter / Roguelite sinh tá»“n mĂ n hĂ¬nh vá»¡.
+            </p>
+            <div class="flex flex-wrap justify-center gap-4">
+                <div class="bg-slate-800/80 backdrop-blur border border-slate-700 rounded-lg px-6 py-4">
+                    <div class="text-3xl font-bold text-emerald-400 mb-1">10,000+</div>
+                    <div class="text-xs text-slate-400 uppercase tracking-wide">Entity Má»¥c TiĂªu</div>
+                </div>
+                <div class="bg-slate-800/80 backdrop-blur border border-slate-700 rounded-lg px-6 py-4">
+                    <div class="text-3xl font-bold text-rose-400 mb-1">60 FPS</div>
+                    <div class="text-xs text-slate-400 uppercase tracking-wide">Má»©c Khung HĂ¬nh Chuáº©n</div>
+                </div>
+                <div class="bg-slate-800/80 backdrop-blur border border-slate-700 rounded-lg px-6 py-4">
+                    <div class="text-3xl font-bold text-amber-400 mb-1">ECS</div>
+                    <div class="text-xs text-slate-400 uppercase tracking-wide">Kiáº¿n TrĂºc LĂµi</div>
+                </div>
+            </div>
+            <div class="mt-8">
+                <a id="exploreBtn" href="../deep-dive/" class="ripple-link transition-link cta-glow inline-block bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-3 px-6 rounded-lg shadow-lg">KhĂ¡m phĂ¡ chi tiáº¿t</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-6xl mx-auto px-4 py-16 sm:px-6 lg:px-8 space-y-24">
+
+        <section id="overview" class="scroll-mt-24">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-slate-900 mb-4">Nháº­n Diá»‡n Há»‡ Thá»‘ng LĂµi</h2>
+                <p class="text-slate-600 max-w-2xl mx-auto">PhĂ¢n tĂ­ch DNA cá»§a trĂ² chÆ¡i Ä‘á»ƒ xĂ¡c Ä‘á»‹nh trá»ng tĂ¢m phĂ¡t triá»ƒn. Game táº­p trung tuyá»‡t Ä‘á»‘i vĂ o nhá»‹p Ä‘á»™ vĂ  sá»‘ lÆ°á»£ng váº­t thá»ƒ thay vĂ¬ logic AI phá»©c táº¡p.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div class="bg-white p-8 rounded-2xl shadow-lg border border-slate-100 tech-card">
+                    <h3 class="text-xl font-bold text-slate-800 mb-6 flex items-center gap-3"><span class="text-2xl">đŸ§¬</span> Ma Tráº­n Äáº·c TĂ­nh Game</h3>
+                    <div class="chart-container">
+                        <canvas id="dnaChart"></canvas>
+                    </div>
+                    <p class="text-sm text-center text-slate-500 mt-4 italic">Biá»ƒu Ä‘á»“ Radar thá»ƒ hiá»‡n sá»± lá»‡ch pha cá»‘ Ă½ vá» phĂ­a "Máº­t Ä‘á»™ QuĂ¡i váº­t" vĂ  "Tá»‘c Ä‘á»™ Nhá»‹p game".</p>
+                </div>
+                
+                <div class="space-y-6">
+                    <div class="bg-indigo-50 border-l-4 border-indigo-600 p-6 rounded-r-xl">
+                        <h4 class="font-bold text-indigo-900 text-lg mb-2">Äáº·c Táº£ Ká»¹ Thuáº­t Cáº¥p 1</h4>
+                        <ul class="space-y-3 text-indigo-800">
+                            <li class="flex items-start"><span class="mr-2 font-bold text-indigo-600">Â»</span> <strong>Thá»ƒ loáº¡i:</strong> Roguelite Survival / Horde Auto-shooter.</li>
+                            <li class="flex items-start"><span class="mr-2 font-bold text-indigo-600">Â»</span> <strong>GĂ³c nhĂ¬n:</strong> Top-down 2D (Camera khĂ³a theo Player).</li>
+                            <li class="flex items-start"><span class="mr-2 font-bold text-indigo-600">Â»</span> <strong>Ná»n táº£ng:</strong> PC (BĂ n phĂ­m/Chuá»™t) & Mobile (Virtual Joystick).</li>
+                        </ul>
+                    </div>
+                    <p class="text-slate-600 leading-relaxed">
+                        Sá»± Ä‘Ă¡nh Ä‘á»•i lá»›n nháº¥t trong kiáº¿n trĂºc lĂ  hi sinh "Pathfinding (A*)" vĂ  "Váº­t lĂ½ phá»©c táº¡p (Rigidbodies)" Ä‘á»ƒ Ä‘á»•i láº¥y kháº£ nÄƒng káº¿t xuáº¥t hĂ ng nghĂ¬n quĂ¡i váº­t (Hordes) cĂ¹ng lĂºc. Thuáº­t toĂ¡n di chuyá»ƒn chá»§ yáº¿u dá»±a trĂªn <em>Steering Behaviors cÆ¡ báº£n</em> (Seek target).
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section id="mechanics" class="scroll-mt-24">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-slate-900 mb-4">VĂ²ng Láº·p Tráº£i Nghiá»‡m (Core Loop)</h2>
+                <p class="text-slate-600 max-w-2xl mx-auto">Sá»± thĂ nh cĂ´ng cá»§a game Ä‘áº¿n tá»« má»™t chu trĂ¬nh láº·p gĂ¢y nghiá»‡n (Feedback Loop) Ä‘Æ°á»£c thiáº¿t káº¿ cá»±c ká»³ cháº·t cháº½, láº·p láº¡i hĂ ng trÄƒm láº§n má»—i phiĂªn chÆ¡i.</p>
+            </div>
+
+            <div class="bg-white p-8 rounded-2xl shadow-lg border border-slate-100 mb-12 tech-card">
+                <div class="flex flex-col md:flex-row justify-center items-center gap-6">
+                    <div class="flex-1 w-full bg-blue-50 border border-blue-200 p-6 rounded-xl text-center">
+                        <div class="text-4xl mb-3">đŸƒ</div>
+                        <h4 class="font-bold text-blue-900 mb-2">1. Sinh Tá»“n & Di Chuyá»ƒn</h4>
+                        <p class="text-sm text-blue-700">NgÆ°á»i chÆ¡i Ä‘iá»u khiá»ƒn hÆ°á»›ng Ä‘i, nĂ© trĂ¡nh báº§y quĂ¡i váº­t liĂªn tá»¥c khĂ©p gĂ³c.</p>
+                    </div>
+                    
+                    <div class="text-3xl text-slate-300 font-bold rotate-90 md:rotate-0">â”</div>
+                    
+                    <div class="flex-1 w-full bg-rose-50 border border-rose-200 p-6 rounded-xl text-center">
+                        <div class="text-4xl mb-3">â”ï¸</div>
+                        <h4 class="font-bold text-rose-900 mb-2">2. Táº¥n CĂ´ng Tá»± Äá»™ng</h4>
+                        <p class="text-sm text-rose-700">VÅ© khĂ­ tá»± Ä‘á»™ng kĂ­ch hoáº¡t dá»±a trĂªn Cooldown Timer vĂ  thuáº­t toĂ¡n nháº¯m má»¥c tiĂªu.</p>
+                    </div>
+
+                    <div class="text-3xl text-slate-300 font-bold rotate-90 md:rotate-0">â”</div>
+
+                    <div class="flex-1 w-full bg-emerald-50 border border-emerald-200 p-6 rounded-xl text-center">
+                        <div class="text-4xl mb-3">đŸ’</div>
+                        <h4 class="font-bold text-emerald-900 mb-2">3. Thu Tháº­p TĂ i NguyĂªn</h4>
+                        <p class="text-sm text-emerald-700">QuĂ¡i cháº¿t rá»›t XP Gem. Thu tháº­p Ä‘á»ƒ lĂ m Ä‘áº§y thanh kinh nghiá»‡m.</p>
+                    </div>
+
+                    <div class="text-3xl text-slate-300 font-bold rotate-90 md:rotate-0">â”</div>
+
+                    <div class="flex-1 w-full bg-amber-50 border border-amber-200 p-6 rounded-xl text-center">
+                        <div class="text-4xl mb-3">â¬†ï¸</div>
+                        <h4 class="font-bold text-amber-900 mb-2">4. Táº¡m Dá»«ng & Lá»±a Chá»n</h4>
+                        <p class="text-sm text-amber-700">Level Up trigger UI Draft (RNG). Chá»n Relic/VÅ© khĂ­ má»›i vĂ  láº·p láº¡i vĂ²ng láº·p.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                    <h5 class="font-bold text-slate-800 mb-3 border-b pb-2">Há»‡ Thá»‘ng Di Chuyá»ƒn</h5>
+                    <p class="text-sm text-slate-600 mb-2">Sá»­ dá»¥ng <strong>Kinematic Body</strong> thay vĂ¬ Dynamic Body Ä‘á»ƒ kiá»ƒm soĂ¡t tuyá»‡t Ä‘á»‘i vector váº­n tá»‘c. Va cháº¡m giá»¯a Player-QuĂ¡i khĂ´ng cáº£n Ä‘Æ°á»ng (Non-blocking) mĂ  chá»‰ trá»« mĂ¡u dáº¡ng Overlap Box.</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                    <h5 class="font-bold text-slate-800 mb-3 border-b pb-2">Thuáº­t ToĂ¡n Ngáº¯m Báº¯n</h5>
+                    <p class="text-sm text-slate-600 mb-2">Má»—i vÅ© khĂ­ cĂ³ Logic riĂªng: Káº» Ä‘á»‹ch gáº§n nháº¥t (Nearest Euclidean), Káº» Ä‘á»‹ch mĂ¡u cao nháº¥t, Random hÆ°á»›ng, hoáº·c báº¯n theo hÆ°á»›ng Vector di chuyá»ƒn cá»§a Player.</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                    <h5 class="font-bold text-slate-800 mb-3 border-b pb-2">Pháº£n Há»“i UI/UX (Juiciness)</h5>
+                    <p class="text-sm text-slate-600 mb-2">Yáº¿u tá»‘ quyáº¿t Ä‘á»‹nh cáº£m giĂ¡c "Ä‘Ă£ tay": Sá»‘ sĂ¡t thÆ°Æ¡ng bay lÆ¡ lá»­ng (Floating Text Tweening), Hiá»‡u á»©ng giáº­t mĂ n hĂ¬nh (Screen Shake) vĂ  Khá»±ng hĂ¬nh siĂªu nhá» (Hit Stop).</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="architecture" class="scroll-mt-24">
+            <div class="bg-slate-900 text-white rounded-3xl p-8 md:p-12 shadow-2xl relative overflow-hidden">
+                <div class="absolute top-0 right-0 w-64 h-64 bg-indigo-500 rounded-full blur-3xl opacity-20 -translate-y-1/2 translate-x-1/3"></div>
+                <div class="absolute bottom-0 left-0 w-64 h-64 bg-emerald-500 rounded-full blur-3xl opacity-20 translate-y-1/2 -translate-x-1/3"></div>
+                
+                <div class="relative z-10">
+                    <div class="text-center mb-10">
+                        <h2 class="text-3xl font-bold mb-4">Kiáº¿n TrĂºc ECS (Entity Component System)</h2>
+                        <p class="text-slate-300 max-w-2xl mx-auto">OOP (Láº­p trĂ¬nh HÆ°á»›ng Ä‘á»‘i tÆ°á»£ng) vá»›i cĂ¢y káº¿ thá»«a sĂ¢u sáº½ triá»‡t tiĂªu hiá»‡u nÄƒng Cache cá»§a CPU. ECS biáº¿n toĂ n bá»™ game thĂ nh dá»¯ liá»‡u dáº¡ng lÆ°á»›i (Data-Oriented Design) Ä‘á»ƒ CPU xá»­ lĂ½ hĂ ng loáº¡t.</p>
+                    </div>
+
+                    <div class="bg-slate-800/80 backdrop-blur border border-slate-700 rounded-2xl p-6 mb-10">
+                        <div class="flex flex-col md:flex-row gap-8 justify-center items-stretch text-center">
+                            
+                            <div class="flex-1 bg-indigo-900/50 border border-indigo-500/50 p-6 rounded-xl relative">
+                                <div class="absolute -top-4 left-1/2 -translate-x-1/2 bg-indigo-500 text-white w-8 h-8 rounded-full flex items-center justify-center font-bold">E</div>
+                                <h3 class="text-xl font-bold text-indigo-300 mt-2 mb-3">Entities</h3>
+                                <p class="text-sm text-indigo-100 mb-4">Chá»‰ lĂ  Ä‘á»‹nh danh (Integer IDs). KhĂ´ng chá»©a báº¥t ká»³ Logic hay Dá»¯ liá»‡u nĂ o.</p>
+                                <div class="font-mono text-xs bg-indigo-950/80 p-3 rounded text-indigo-200 text-left">
+                                    Entity 1042 (Player)<br>
+                                    Entity 5912 (Enemy)<br>
+                                    Entity 8831 (Bullet)
+                                </div>
+                            </div>
+
+                            <div class="flex-1 bg-emerald-900/50 border border-emerald-500/50 p-6 rounded-xl relative">
+                                <div class="absolute -top-4 left-1/2 -translate-x-1/2 bg-emerald-500 text-white w-8 h-8 rounded-full flex items-center justify-center font-bold">C</div>
+                                <h3 class="text-xl font-bold text-emerald-300 mt-2 mb-3">Components</h3>
+                                <p class="text-sm text-emerald-100 mb-4">Chá»©a dá»¯ liá»‡u thuáº§n tĂºy (Structs/Arrays). HoĂ n toĂ n khĂ´ng chá»©a phÆ°Æ¡ng thá»©c (Methods).</p>
+                                <div class="font-mono text-xs bg-emerald-950/80 p-3 rounded text-emerald-200 text-left">
+                                    Transform {x, y}<br>
+                                    Velocity {dx, dy}<br>
+                                    Health {hp, max_hp}
+                                </div>
+                            </div>
+
+                            <div class="flex-1 bg-rose-900/50 border border-rose-500/50 p-6 rounded-xl relative">
+                                <div class="absolute -top-4 left-1/2 -translate-x-1/2 bg-rose-500 text-white w-8 h-8 rounded-full flex items-center justify-center font-bold">S</div>
+                                <h3 class="text-xl font-bold text-rose-300 mt-2 mb-3">Systems</h3>
+                                <p class="text-sm text-rose-100 mb-4">CĂ¡c hĂ m Logic cháº¡y má»—i Frame, duyá»‡t qua cĂ¡c máº£ng Components Ä‘á»ƒ tĂ­nh toĂ¡n.</p>
+                                <div class="font-mono text-xs bg-rose-950/80 p-3 rounded text-rose-200 text-left">
+                                    MovementSystem(Transform, Velocity)<br>
+                                    DamageSystem(Health, Collider)
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div>
+                            <h4 class="text-lg font-bold text-slate-200 mb-4 border-b border-slate-700 pb-2">Tiáº¿n trĂ¬nh Game Loop</h4>
+                            <div class="bg-slate-950 rounded-lg p-4 font-mono text-sm text-emerald-400 overflow-x-auto">
+                                while is_game_running:
+                                dt = get_delta_time()
+                                
+                                <span class="text-slate-500"># 1. Thu tháº­p Input</span>
+                                InputSystem.Process()
+                                
+                                if state == PLAYING:
+                                    <span class="text-slate-500"># 2. Cáº­p nháº­t Logic (Logic Update)</span>
+                                    SpawnerSystem.Update(dt)
+                                    AISystem.Update(dt)
+                                    MovementSystem.Update(dt)
+                                    
+                                    <span class="text-slate-500"># TĂ¡i táº¡o lÆ°á»›i khĂ´ng gian cho Va cháº¡m</span>
+                                    SpatialHashGrid.Rebuild() 
+                                    CollisionSystem.Check()
+                                    CombatSystem.ApplyDamage()
+                                    
+                                <span class="text-slate-500"># 3. Káº¿t xuáº¥t Äá»“ há»a (Render Pipeline)</span>
+                                Renderer.ClearScreen()
+                                RenderSystem.DrawBatched()
+                                UISystem.Draw()
+                                Renderer.SwapBuffers()
+                            </div>
+                        </div>
+                        <div class="space-y-4">
+                            <h4 class="text-lg font-bold text-slate-200 mb-4 border-b border-slate-700 pb-2">PhĂ¢n TĂ­ch ThĂ nh Pháº§n Váº­t Thá»ƒ</h4>
+                            <div class="bg-slate-800 rounded p-4 flex gap-3 items-center">
+                                <div class="w-10 h-10 rounded bg-indigo-500 flex-shrink-0 flex items-center justify-center text-xl">đŸ§</div>
+                                <div>
+                                    <div class="font-bold text-indigo-300 text-sm">Player Entity</div>
+                                    <div class="font-mono text-xs text-slate-400">Transform + Velocity + InputController + Health + MagnetArea + WeaponInventory</div>
+                                </div>
+                            </div>
+                            <div class="bg-slate-800 rounded p-4 flex gap-3 items-center">
+                                <div class="w-10 h-10 rounded bg-rose-500 flex-shrink-0 flex items-center justify-center text-xl">đŸ‘¾</div>
+                                <div>
+                                    <div class="font-bold text-rose-300 text-sm">Enemy Entity</div>
+                                    <div class="font-mono text-xs text-slate-400">Transform + Velocity + AI_Follow + Health + DamageBox</div>
+                                </div>
+                            </div>
+                            <div class="bg-slate-800 rounded p-4 flex gap-3 items-center">
+                                <div class="w-10 h-10 rounded bg-emerald-500 flex-shrink-0 flex items-center justify-center text-xl">đŸ”®</div>
+                                <div>
+                                    <div class="font-bold text-emerald-300 text-sm">XP Gem Entity</div>
+                                    <div class="font-mono text-xs text-slate-400">Transform + XPValue + MagneticState</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <section id="optimization" class="scroll-mt-24">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-slate-900 mb-4">Chiáº¿n LÆ°á»£c Tá»‘i Æ¯u Hiá»‡u NÄƒng & Rendering</h2>
+                <p class="text-slate-600 max-w-2xl mx-auto">PhĂ¢n tĂ­ch ngĂ¢n sĂ¡ch tĂ i nguyĂªn (Budget) vĂ  cĂ¡c ká»¹ thuáº­t cá»‘t lĂµi giĂºp thiáº¿t bá»‹ di Ä‘á»™ng cĂ³ thá»ƒ render hĂ ng ngĂ n váº­t thá»ƒ mĂ  khĂ´ng rá»›t khung hĂ¬nh.</p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-12">
+                
+                <div class="bg-white p-8 rounded-2xl shadow-lg border border-slate-100 tech-card flex flex-col">
+                    <h3 class="text-xl font-bold text-slate-800 mb-6 flex items-center gap-3"><span class="text-2xl">đŸ“</span> NgĂ¢n SĂ¡ch Xá»­ LĂ½ (Per Frame)</h3>
+                    <div class="chart-container flex-grow">
+                        <canvas id="budgetChart"></canvas>
+                    </div>
+                    <p class="text-sm text-slate-500 mt-4 text-center">Há»‡ thá»‘ng Va cháº¡m vĂ  Cáº­p nháº­t AI chiáº¿m pháº§n lá»›n CPU. ÄĂ²i há»i cáº¥u trĂºc dá»¯ liá»‡u pháº³ng.</p>
+                </div>
+
+                <div class="space-y-6">
+                    <div class="bg-white p-6 rounded-xl shadow-sm border-l-4 border-amber-500">
+                        <h4 class="font-bold text-slate-800 text-lg mb-2">1. Batch Rendering & Texture Atlas</h4>
+                        <p class="text-sm text-slate-600 mb-3">GPU sáº½ quĂ¡ táº£i náº¿u gá»i lá»‡nh váº½ (Draw Call) cho tá»«ng quĂ¡i váº­t riĂªng láº». Giáº£i phĂ¡p:</p>
+                        <ul class="text-sm text-slate-700 list-disc pl-5 space-y-1 font-mono">
+                            <li>Gom toĂ n bá»™ Asset vĂ o 1 file hĂ¬nh lá»›n (Texture Atlas).</li>
+                            <li>Sá»­ dá»¥ng Instanced Rendering: Váº½ 1 mesh hĂ¬nh vuĂ´ng duy nháº¥t, láº·p láº¡i N láº§n vá»›i máº£ng [X, Y, UV_Coords] truyá»n tháº³ng lĂªn GPU.</li>
+                        </ul>
+                    </div>
+
+                    <div class="bg-white p-6 rounded-xl shadow-sm border-l-4 border-emerald-500">
+                        <h4 class="font-bold text-slate-800 text-lg mb-2">2. Spatial Partitioning (Chia lÆ°á»›i khĂ´ng gian)</h4>
+                        <p class="text-sm text-slate-600 mb-3">Thuáº­t toĂ¡n dĂ² va cháº¡m Brute-force (O(N^2)) sáº½ lĂ m sáº­p game. Ăp dá»¥ng <strong>Spatial Hashing</strong>:</p>
+                        <ul class="text-sm text-slate-700 list-disc pl-5 space-y-1 font-mono">
+                            <li>Chia báº£n Ä‘á»“ thĂ nh cĂ¡c Ă´ Grid. Map Entity ID vĂ o cell tÆ°Æ¡ng á»©ng.</li>
+                            <li>Chá»‰ xĂ©t va cháº¡m giá»¯a cĂ¡c Entity náº±m chung 1 cell hoáº·c 8 Ă´ lĂ¢n cáº­n. ÄÆ°a Ä‘á»™ phá»©c táº¡p vá» má»©c tuyáº¿n tĂ­nh ~O(N).</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="bg-white p-6 rounded-xl shadow-sm border-l-4 border-blue-500">
+                        <h4 class="font-bold text-slate-800 text-lg mb-2">3. Object Pooling (Bá»ƒ chá»©a Bá»™ nhá»›)</h4>
+                        <p class="text-sm text-slate-600">TrĂ¡nh khá»Ÿi táº¡o (<code>new</code>) vĂ  há»§y (<code>destroy</code>) rĂ¡c bá»™ nhá»› trong lĂºc chÆ¡i. Táº¡o sáºµn máº£ng tÄ©nh 3000 con quĂ¡i váº­t lĂºc Loading. Khi quĂ¡i cháº¿t, áº©n Ä‘i (SetActive = false) thay vĂ¬ xĂ³a khá»i RAM, vĂ  tĂ¡i sá»­ dá»¥ng khi Spawn quĂ¡i má»›i.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white p-8 rounded-2xl shadow-lg border border-slate-100 tech-card">
+                <h3 class="text-xl font-bold text-slate-800 mb-6 flex items-center justify-center gap-3">TĂ¡c Äá»™ng Cá»§a Tá»‘i Æ¯u (Thá»i gian Render Frame - ms)</h3>
+                <div class="chart-container">
+                    <canvas id="optimizationChart"></canvas>
+                </div>
+                <p class="text-sm text-slate-500 mt-4 text-center">Má»¥c tiĂªu lĂ  giá»¯ tá»•ng thá»i gian xá»­ lĂ½ má»™t Frame dÆ°á»›i 16.6ms Ä‘á»ƒ duy trĂ¬ á»•n Ä‘á»‹nh má»©c 60 FPS.</p>
+            </div>
+        </section>
+
+        <section id="recreation" class="pb-16 scroll-mt-24">
+            <div class="bg-indigo-600 text-white rounded-3xl p-8 md:p-12 shadow-xl text-center">
+                <h2 class="text-3xl font-bold mb-6">Chiáº¿n LÆ°á»£c TĂ¡i Táº¡o V1.0 (MVP Scope)</h2>
+                <p class="text-indigo-200 mb-10 max-w-2xl mx-auto">TrÆ°á»›c khi xĂ¢y dá»±ng ná»™i dung khá»•ng lá»“, cáº§n hoĂ n thiá»‡n má»™t bá»™ khung MVP (Minimum Viable Product) cá»±c ká»³ vá»¯ng cháº¯c vá»›i Ä‘áº§y Ä‘á»§ tĂ­nh nÄƒng ká»¹ thuáº­t lĂµi.</p>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 text-left">
+                    <div class="bg-white/10 rounded-xl p-6 border border-white/20">
+                        <h3 class="text-xl font-bold mb-4 flex items-center gap-2 text-white">âœ… Pháº£i HoĂ n Thiá»‡n (Must-have)</h3>
+                        <ul class="space-y-3 text-indigo-100 text-sm">
+                            <li class="flex items-center gap-2"><div class="w-5 h-5 rounded-full bg-emerald-400 text-indigo-900 flex items-center justify-center text-xs font-bold">âœ“</div> ECS Core Framework (Arrays/Structs)</li>
+                            <li class="flex items-center gap-2"><div class="w-5 h-5 rounded-full bg-emerald-400 text-indigo-900 flex items-center justify-center text-xs font-bold">âœ“</div> Thuáº­t toĂ¡n Spatial Hashing Grid</li>
+                            <li class="flex items-center gap-2"><div class="w-5 h-5 rounded-full bg-emerald-400 text-indigo-900 flex items-center justify-center text-xs font-bold">âœ“</div> Render Engine: Há»— trá»£ Texture Batching</li>
+                            <li class="flex items-center gap-2"><div class="w-5 h-5 rounded-full bg-emerald-400 text-indigo-900 flex items-center justify-center text-xs font-bold">âœ“</div> Player Movement (WASD) mÆ°á»£t mĂ </li>
+                            <li class="flex items-center gap-2"><div class="w-5 h-5 rounded-full bg-emerald-400 text-indigo-900 flex items-center justify-center text-xs font-bold">âœ“</div> 1 Base Enemy (AI Seekers) + Spawn Logic</li>
+                            <li class="flex items-center gap-2"><div class="w-5 h-5 rounded-full bg-emerald-400 text-indigo-900 flex items-center justify-center text-xs font-bold">âœ“</div> Logic Auto-attack cÆ¡ báº£n (TĂ¬m má»¥c tiĂªu gáº§n nháº¥t)</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="bg-black/20 rounded-xl p-6 border border-white/10">
+                        <h3 class="text-xl font-bold mb-4 flex items-center gap-2 text-white">â³ TrĂ¬ HoĂ£n (Post-MVP)</h3>
+                        <ul class="space-y-3 text-indigo-200/70 text-sm">
+                            <li class="flex items-center gap-2"><div class="w-5 h-5 rounded-full bg-rose-500/50 text-white flex items-center justify-center text-xs font-bold">âœ—</div> Animation Sprites phá»©c táº¡p (DĂ¹ng hĂ¬nh há»c thay tháº¿ trÆ°á»›c)</li>
+                            <li class="flex items-center gap-2"><div class="w-5 h-5 rounded-full bg-rose-500/50 text-white flex items-center justify-center text-xs font-bold">âœ—</div> Há»‡ thá»‘ng nĂ¢ng cáº¥p Relic/VÅ© khĂ­ Ä‘a dáº¡ng (Drafting UI)</li>
+                            <li class="flex items-center gap-2"><div class="w-5 h-5 rounded-full bg-rose-500/50 text-white flex items-center justify-center text-xs font-bold">âœ—</div> Save/Load State & Progression Meta-game</li>
+                            <li class="flex items-center gap-2"><div class="w-5 h-5 rounded-full bg-rose-500/50 text-white flex items-center justify-center text-xs font-bold">âœ—</div> Há»‡ thá»‘ng Ă‚m thanh Ä‘a kĂªnh (Audio mixing)</li>
+                        </ul>
+                    </div>
+
+                </div>
+                
+            </div>
+        </section>
+    </main>
+
+        <section id="contact" class="max-w-6xl mx-auto px-4 py-16 sm:px-6 lg:px-8">
+            <div class="bg-white p-8 rounded-2xl shadow-lg border border-slate-100 text-center">
+                <h2 class="text-2xl font-bold text-slate-900 mb-4">Contact / LiĂªn há»‡</h2>
+                <p class="text-slate-600 mb-4">Báº¡n cĂ³ thá»ƒ liĂªn há»‡ Ä‘á»ƒ trao Ä‘á»•i vá» dá»± Ă¡n, há»£p tĂ¡c hoáº·c yĂªu cáº§u code sample.</p>
+                <div class="flex flex-col md:flex-row items-center justify-center gap-6">
+                    <a class="text-indigo-600 font-semibold" href="mailto:vanthang48692109@gmail.com">vanthang48692109@gmail.com</a>
+                    <a class="text-slate-700 hover:text-indigo-600" href="https://github.com/Thang4869" target="_blank" rel="noopener">GitHub: /Thang4869</a>
+                    <a class="text-slate-700 hover:text-indigo-600" href="#" aria-label="Link to resume">View CV / Resume</a>
+                </div>
+            </div>
+        </section>
+
+    <footer class="bg-slate-900 text-slate-500 text-center py-8 border-t border-slate-800">
+        <p class="text-sm">BĂ¡o cĂ¡o PhĂ¢n tĂ­ch Kiáº¿n trĂºc Há»‡ Thá»‘ng Bizarre Brigade.</p>
+    </footer>
+
+    <!-- Fixed scroll-progress navigation button -->
+    <div id="bbScrollNav" class="bb-scroll-nav" role="button" aria-label="Scroll navigation" title="Scroll navigation" tabindex="0">
+        <svg viewBox="0 0 44 44" aria-hidden="true">
+            <circle class="bb-ring-bg" cx="22" cy="22" r="18"></circle>
+            <circle class="bb-ring" cx="22" cy="22" r="18" stroke-dasharray="113.097" stroke-dashoffset="113.097"></circle>
+        </svg>
+        <div class="bb-scroll-label"><span class="percent">0%</span><span class="arrow">â†‘</span></div>
+    </div>
+
+    <script type="module" src="../js/infographic.js"></script>
+    <script>
+        // Robust navigation for the "KhĂ¡m phĂ¡ chi tiáº¿t" button.
+        // Capture-phase handler ensures it overrides other click interceptors.
+        (function(){
+            const btn = document.getElementById('exploreBtn');
+            if (!btn) return;
+            btn.addEventListener('click', function(e){
+                try {
+                    e.preventDefault();
+                    e.stopImmediatePropagation();
+                } catch (err) {}
+                // Compute base path (handles /infographic/ and /<repo>/infographic/)
+                const p = location.pathname.replace(/\/infographic\/?$/,'/');
+                location.href = p + 'deep-dive/';
+            }, {capture: true});
+        })();
+    </script>
+</body>
+</html>
